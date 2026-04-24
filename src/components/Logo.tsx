@@ -9,7 +9,7 @@ export function Logo({ dark = false, className = "" }: { dark?: boolean; classNa
         </svg>
       </span>
       <span className={`text-[15px] font-semibold tracking-tight ${dark ? "text-white" : "text-[var(--charcoal)]"}`}>
-        North<span className="text-[var(--orange-eb)]">beam</span>
+        Eco<span className="text-[var(--orange-eb)]">Bridge</span>
       </span>
     </Link>
   );

@@ -1,6 +1,6 @@
 // Shared site constants
 export const BRAND = {
-  name: "Northbeam",
+  name: "EcoBridge",
   tagline: "Turn every report into a decision.",
   team: "Mindmesh",
   hackathon: "EDGEIQ Open Innovation Hackathon 2026",

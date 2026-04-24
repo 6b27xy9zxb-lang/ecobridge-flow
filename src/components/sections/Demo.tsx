@@ -18,7 +18,7 @@ export function Demo() {
         </div>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <h2 className="max-w-2xl text-balance text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.02] tracking-tight">
-            Try Northbeam. <span className="text-[var(--charcoal)]/50">No signup.</span>
+            Try EcoBridge. <span className="text-[var(--charcoal)]/50">No signup.</span>
           </h2>
           <div className="inline-flex rounded-full border border-[var(--charcoal)]/10 bg-white p-1 shadow-sm">
             {([
@@ -181,7 +181,7 @@ function AnalyzeFlow() {
     setResult(null);
 
     try {
-      const system = `You are Northbeam, a senior business operations analyst. Read the report and return STRICT JSON matching this schema (no prose, no markdown):
+      const system = `You are EcoBridge, a senior business operations analyst. Read the report and return STRICT JSON matching this schema (no prose, no markdown):
 
 {
   "summary": "2-sentence executive summary of what's happening operationally",
@@ -303,7 +303,7 @@ Be specific. Reference actual numbers from the report. Avoid fluff. Avoid sustai
 
         {/* Side panel — what we look for */}
         <aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">What Northbeam looks for</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">What EcoBridge looks for</p>
           <ul className="mt-5 space-y-4 text-sm text-white/75">
             {[
               { t: "Bottlenecks", d: "Stages where throughput collapses." },
@@ -542,7 +542,7 @@ function WorkspaceFlow() {
 
 type Msg = { role: "user" | "model"; text: string; attachment?: string };
 
-const SYSTEM_PROMPT = `You are Northbeam, a senior business operations analyst.
+const SYSTEM_PROMPT = `You are EcoBridge, a senior business operations analyst.
 
 Your job is to help operators read their data and decide what to do next. You analyze reports, dashboards, exports and pasted notes, and produce sharp, actionable insights.
 
@@ -633,7 +633,7 @@ function ChatFlow() {
         <div className="flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--orange-eb)] text-white"><Sparkles className="h-4 w-4" /></span>
           <div>
-            <p className="text-sm font-semibold">Northbeam · AI Analyst</p>
+            <p className="text-sm font-semibold">EcoBridge · AI Analyst</p>
             <p className="text-[11px] text-white/50">Operations · workflows · recommendations</p>
           </div>
         </div>
@@ -666,7 +666,7 @@ function ChatFlow() {
           <div className="grid h-full place-items-center text-center">
             <div className="max-w-md">
               <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-[var(--orange-eb)] text-white"><Sparkles className="h-5 w-5" /></div>
-              <p className="mt-4 text-lg font-medium">Ask Northbeam about your operations.</p>
+              <p className="mt-4 text-lg font-medium">Ask EcoBridge about your operations.</p>
               <p className="mt-1 text-sm text-white/50">Drop a report or paste data, then ask what to do about it.</p>
               <div className="mt-6 flex flex-wrap justify-center gap-2">
                 {PROMPT_CHIPS.map((p) => (
@@ -721,7 +721,7 @@ function ChatFlow() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Northbeam to analyze something…"
+            placeholder="Ask EcoBridge to analyze something…"
             className="flex-1 bg-transparent text-sm placeholder:text-white/30 focus:outline-none"
           />
           <button type="submit" disabled={loading || (!input.trim() && !pendingFile)} className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--orange-eb)] text-white disabled:opacity-40">

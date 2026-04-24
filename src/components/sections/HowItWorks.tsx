@@ -3,7 +3,7 @@ import { Upload, Sparkles, ArrowRightCircle } from "lucide-react";
 
 const STEPS = [
   { icon: Upload, title: "Drop your reports", body: "PDFs, spreadsheets, exports, pasted notes — everything that lives on your desk today." },
-  { icon: Sparkles, title: "Northbeam reads & models", body: "Tables, charts, prose. Diagnosed against workflow, throughput and resource models." },
+  { icon: Sparkles, title: "EcoBridge reads & models", body: "Tables, charts, prose. Diagnosed against workflow, throughput and resource models." },
   { icon: ArrowRightCircle, title: "Ship the next move", body: "Ranked recommendations, expected impact, owner and KPI — straight into your tracker." },
 ];
 

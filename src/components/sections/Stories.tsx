@@ -20,7 +20,7 @@ export function Stories() {
         title="A 38-page Q3 review, decoded in 12 minutes."
         steps={[
           "Daniel uploads the Q3 operations report and last week's ticket export.",
-          "Northbeam parses 2,800+ rows and surfaces a queue spike in the Review stage.",
+          "EcoBridge parses 2,800+ rows and surfaces a queue spike in the Review stage.",
           "It quantifies the lift: rebalance 2 engineers, throughput +18%, risk low.",
           "Daniel ships the change Monday. Cycle time drops 4 days by Friday.",
         ]}
@@ -33,7 +33,7 @@ export function Stories() {
         title="Cross-team performance gaps, mapped in one session."
         steps={[
           "Priya drops in three quarterly reports from Sales, CS and Product.",
-          "Northbeam aligns metrics across teams and flags a churn signal in onboarding.",
+          "EcoBridge aligns metrics across teams and flags a churn signal in onboarding.",
           "Recommendation: collapse two onboarding steps, expected NRR lift +6.2%.",
           "She walks into the QBR with the playbook already written.",
         ]}

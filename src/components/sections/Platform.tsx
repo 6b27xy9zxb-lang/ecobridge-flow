@@ -8,7 +8,7 @@ const ENGINES = [
     tag: "Layer 01",
     color: "var(--violet-glow)",
     headline: "Every report. Every format. One workspace.",
-    body: "Drop in PDFs, spreadsheets, BI exports, ops logs or pasted notes. Northbeam parses tables, charts and prose into a structured operational model — ready to interrogate.",
+    body: "Drop in PDFs, spreadsheets, BI exports, ops logs or pasted notes. EcoBridge parses tables, charts and prose into a structured operational model — ready to interrogate.",
     bullets: ["PDF, XLSX, CSV, JSON", "Auto-table extraction", "Chart + prose understanding"],
   },
   {

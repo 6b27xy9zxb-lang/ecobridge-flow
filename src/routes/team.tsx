@@ -7,9 +7,9 @@ import teamHero from "@/assets/team-hero.jpg";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team & Vision — Northbeam" },
-      { name: "description", content: "Meet Team Mindmesh — the builders behind Northbeam, the intelligence layer for modern operations." },
-      { property: "og:title", content: "Team & Vision — Northbeam" },
+      { title: "Team & Vision — EcoBridge" },
+      { name: "description", content: "Meet Team Mindmesh — the builders behind EcoBridge, the intelligence layer for modern operations." },
+      { property: "og:title", content: "Team & Vision — EcoBridge" },
       { property: "og:description", content: "One workbench where every report turns into a shippable decision." },
       { property: "og:image", content: teamHero },
     ],
@@ -43,7 +43,7 @@ function TeamPage() {
             transition={{ duration: 0.9, delay: 0.15 }}
             className="mt-6 max-w-[20ch] text-balance text-[clamp(2.6rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]"
           >
-            Northbeam is the intelligence layer for modern operations.
+            EcoBridge is the intelligence layer for modern operations.
           </motion.h1>
         </div>
       </section>

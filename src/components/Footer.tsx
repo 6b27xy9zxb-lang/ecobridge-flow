@@ -42,7 +42,7 @@ export function Footer() {
 
       <div className="border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-6 text-xs text-white/40 md:flex-row md:items-center md:px-8">
-          <p>© {new Date().getFullYear()} Northbeam. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} EcoBridge. All rights reserved.</p>
           <p>Built by Team Mindmesh · EDGEIQ 2026</p>
         </div>
       </div>
