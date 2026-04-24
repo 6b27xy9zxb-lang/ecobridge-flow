@@ -31,6 +31,12 @@ export const Route = createRootRoute({
       { name: "author", content: "Team Mindmesh" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "EcoBridge — Turn every report into a decision." },
+      { name: "twitter:title", content: "EcoBridge — Turn every report into a decision." },
+      { property: "og:description", content: "EcoBridge is the intelligence layer for modern operations. Upload a report, surface the bottleneck, ship the next move — on one connected workbench." },
+      { name: "twitter:description", content: "EcoBridge is the intelligence layer for modern operations. Upload a report, surface the bottleneck, ship the next move — on one connected workbench." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6821eba8-d6da-4750-af2e-7ba10f6722e5/id-preview-938be980--a860d502-19c9-44ef-9916-7c916b69edbd.lovable.app-1777068871812.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6821eba8-d6da-4750-af2e-7ba10f6722e5/id-preview-938be980--a860d502-19c9-44ef-9916-7c916b69edbd.lovable.app-1777068871812.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
