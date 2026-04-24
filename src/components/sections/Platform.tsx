@@ -3,31 +3,31 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const ENGINES = [
   {
-    id: "scopemap",
-    name: "ScopeMap",
-    tag: "For Businesses",
-    color: "var(--sage)",
-    headline: "See every emission. Source every fix.",
-    body: "AI auto-estimates Scope 3 emissions across your supply chain, visualizes hotspots in real time, generates CSRD-ready reports, and flags exactly which talent gaps you need to close to fix them.",
-    bullets: ["Scope 3 auto-classification", "Hotspot heatmap", "CSRD + BRSR exports"],
+    id: "ingest",
+    name: "Ingest",
+    tag: "Layer 01",
+    color: "var(--violet-glow)",
+    headline: "Every report. Every format. One workspace.",
+    body: "Drop in PDFs, spreadsheets, BI exports, ops logs or pasted notes. Northbeam parses tables, charts and prose into a structured operational model — ready to interrogate.",
+    bullets: ["PDF, XLSX, CSV, JSON", "Auto-table extraction", "Chart + prose understanding"],
   },
   {
-    id: "careershift",
-    name: "CareerShift",
-    tag: "For Workers",
-    color: "var(--cream)",
-    headline: "From legacy job to green career, in 90 days.",
-    body: "Connect LinkedIn, get matched to green roles by skill adjacency, receive a personalized 90-day reskilling roadmap, and see real salary projections at year 1, 3, and 5.",
-    bullets: ["Skill adjacency engine", "90-day roadmap", "Salary projections"],
-  },
-  {
-    id: "connector",
-    name: "Connector",
-    tag: "The Network",
+    id: "diagnose",
+    name: "Diagnose",
+    tag: "Layer 02",
     color: "var(--orange-eb)",
-    headline: "The bridge between supply and demand.",
-    body: "Workers who complete CareerShift get verified profiles. Companies with talent gaps see matched candidates automatically. Every emissions reduction creates a career; every career closes a gap.",
-    bullets: ["Verified green profiles", "Auto-matched roles", "Two-sided network effect"],
+    headline: "Find the bottleneck before the meeting.",
+    body: "The Diagnose engine runs your data through workflow, throughput and resource models — surfacing the steps that drag cycle time, the queues that pile up, and the inputs that drift.",
+    bullets: ["Bottleneck detection", "Variance & drift scans", "Process gap mapping"],
+  },
+  {
+    id: "recommend",
+    name: "Recommend",
+    tag: "Layer 03",
+    color: "var(--mist)",
+    headline: "From insight to a shippable next step.",
+    body: "Every finding is paired with a ranked recommendation: who acts, what they change, expected impact, and the metric to watch. Insight you can put on a Jira ticket.",
+    bullets: ["Ranked actions", "Expected impact %", "Owner + metric assigned"],
   },
 ];
 
@@ -49,10 +49,9 @@ export function Platform() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl text-balance text-[clamp(2.2rem,5vw,4.2rem)] font-semibold leading-[1.02] tracking-tight"
         >
-          One platform. <span className="text-white/40">Three engines.</span>
+          One pipeline. <span className="text-white/40">Three engines.</span>
         </motion.h2>
 
-        {/* Tabs */}
         <div className="mt-14 flex flex-wrap gap-2 border-b border-white/10">
           {ENGINES.map((eng, i) => (
             <button
@@ -75,7 +74,6 @@ export function Platform() {
           ))}
         </div>
 
-        {/* Body */}
         <AnimatePresence mode="wait">
           <motion.div
             key={e.id}
@@ -119,145 +117,126 @@ function Mockup({ which, color }: { which: string; color: string }) {
     <div className="relative">
       <div className="absolute inset-0 -z-10 rounded-3xl blur-3xl" style={{ background: `radial-gradient(circle at 50% 50%, color-mix(in oklab, ${color} 25%, transparent), transparent 70%)` }} />
       <div className="glass relative aspect-[4/3] overflow-hidden rounded-3xl p-6">
-        {which === "scopemap" && <ScopeMapMock color={color} />}
-        {which === "careershift" && <RadarMock color={color} />}
-        {which === "connector" && <ConnectorMock color={color} />}
+        {which === "ingest" && <IngestMock color={color} />}
+        {which === "diagnose" && <DiagnoseMock color={color} />}
+        {which === "recommend" && <RecommendMock color={color} />}
       </div>
     </div>
   );
 }
 
-function ScopeMapMock({ color }: { color: string }) {
-  const cells = Array.from({ length: 48 });
+function IngestMock({ color }: { color: string }) {
+  const files = [
+    { name: "Q3-operations.pdf", size: "4.2 MB", kind: "PDF", p: 100 },
+    { name: "throughput-2026.xlsx", size: "812 KB", kind: "XLSX", p: 100 },
+    { name: "tickets-export.csv", size: "1.1 MB", kind: "CSV", p: 78 },
+    { name: "team-notes.md", size: "12 KB", kind: "MD", p: 100 },
+  ];
   return (
     <div className="flex h-full flex-col">
       <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-white/50">
-        <span>Supply chain · Scope 3</span>
-        <span className="rounded-full bg-white/10 px-2 py-0.5">Live</span>
+        <span>Ingest queue</span>
+        <span className="rounded-full bg-white/10 px-2 py-0.5">Parsing</span>
       </div>
-      <div className="grid flex-1 grid-cols-8 gap-1.5">
-        {cells.map((_, i) => {
-          const intensity = Math.random();
-          const isHot = intensity > 0.85;
-          return (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.012, duration: 0.4 }}
-              className="relative aspect-square rounded-md"
-              style={{
-                background: isHot
-                  ? "var(--orange-eb)"
-                  : `color-mix(in oklab, ${color} ${20 + intensity * 50}%, transparent)`,
-              }}
-            >
-              {isHot && <span className="absolute inset-0 rounded-md ring-2 ring-[var(--orange-eb)] animate-pulse-ring" />}
-            </motion.div>
-          );
-        })}
+      <div className="flex-1 space-y-2">
+        {files.map((f, i) => (
+          <motion.div
+            key={f.name}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.08 }}
+            className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[11px]"
+          >
+            <span className="grid h-7 w-7 place-items-center rounded-md text-[9px] font-semibold" style={{ background: `color-mix(in oklab, ${color} 25%, transparent)`, color }}>{f.kind}</span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-white/85">{f.name}</p>
+              <p className="text-white/40">{f.size}</p>
+            </div>
+            <div className="h-1.5 w-20 overflow-hidden rounded-full bg-white/10">
+              <motion.div initial={{ width: 0 }} animate={{ width: `${f.p}%` }} transition={{ delay: 0.4 + i * 0.1, duration: 0.7 }} className="h-full" style={{ background: color }} />
+            </div>
+          </motion.div>
+        ))}
       </div>
-      <div className="mt-3 flex items-center justify-between text-[11px] text-white/60">
-        <span>Hotspots <span className="text-[var(--orange-eb)] font-semibold">7</span></span>
-        <span>Total: 12,480 tCO₂e</span>
+      <div className="mt-3 flex items-center justify-between text-[11px] text-white/55">
+        <span>4 files · 6.1 MB</span>
+        <span style={{ color }}>2,847 fields extracted</span>
       </div>
     </div>
   );
 }
 
-function RadarMock({ color }: { color: string }) {
-  const points = [0.85, 0.6, 0.78, 0.45, 0.72, 0.9];
-  const angle = (i: number) => (i / points.length) * Math.PI * 2 - Math.PI / 2;
-  const cx = 50, cy = 50;
-  const path = points
-    .map((p, i) => {
-      const r = p * 38;
-      const x = cx + r * Math.cos(angle(i));
-      const y = cy + r * Math.sin(angle(i));
-      return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(" ") + " Z";
-
+function DiagnoseMock({ color }: { color: string }) {
+  const stages = [
+    { label: "Intake", v: 100 },
+    { label: "Triage", v: 92 },
+    { label: "Build", v: 64 },
+    { label: "Review", v: 28, bottleneck: true },
+    { label: "Ship", v: 22 },
+  ];
   return (
     <div className="flex h-full flex-col">
       <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-white/50">
-        <span>Skill adjacency map</span>
-        <span className="rounded-full bg-[var(--orange-eb)]/20 px-2 py-0.5 text-[var(--orange-eb)]">81% match</span>
+        <span>Workflow throughput · last 30d</span>
+        <span className="rounded-full bg-[var(--orange-eb)]/20 px-2 py-0.5 text-[var(--orange-eb)]">1 bottleneck</span>
       </div>
-      <div className="relative flex-1">
-        <svg viewBox="0 0 100 100" className="h-full w-full">
-          {[1, 2, 3, 4].map((r) => (
-            <circle key={r} cx={cx} cy={cy} r={r * 9.5} fill="none" stroke="white" strokeOpacity="0.08" />
-          ))}
-          {points.map((_, i) => {
-            const r = 38;
-            const x = cx + r * Math.cos(angle(i));
-            const y = cy + r * Math.sin(angle(i));
-            return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="white" strokeOpacity="0.08" />;
-          })}
-          <motion.path
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            style={{ transformOrigin: "50% 50%" }}
-            d={path}
-            fill={color}
-            fillOpacity="0.25"
-            stroke={color}
-            strokeWidth="0.8"
-          />
-          {points.map((p, i) => {
-            const r = p * 38;
-            const x = cx + r * Math.cos(angle(i));
-            const y = cy + r * Math.sin(angle(i));
-            return <circle key={i} cx={x} cy={y} r="1.4" fill={color} />;
-          })}
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function ConnectorMock({ color }: { color: string }) {
-  return (
-    <div className="flex h-full flex-col">
-      <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-white/50">
-        <span>Connector layer</span>
-        <span className="rounded-full bg-white/10 px-2 py-0.5">Auto-match</span>
-      </div>
-      <div className="relative flex flex-1 items-center justify-between">
-        <div className="z-10 flex flex-col items-center gap-2">
-          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/10 backdrop-blur">
-            <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M3 21V8l9-5 9 5v13M9 21v-7h6v7" /></svg>
+      <div className="flex flex-1 items-end gap-2">
+        {stages.map((s, i) => (
+          <div key={s.label} className="flex flex-1 flex-col items-center gap-2">
+            <div className="relative flex w-full flex-1 items-end">
+              <motion.div
+                initial={{ height: 0 }}
+                whileInView={{ height: `${s.v}%` }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 + i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full rounded-md"
+                style={{ background: s.bottleneck ? "var(--orange-eb)" : color, opacity: s.bottleneck ? 1 : 0.55 }}
+              />
+              {s.bottleneck && <span className="absolute inset-0 rounded-md ring-2 ring-[var(--orange-eb)] animate-pulse-ring" />}
+            </div>
+            <span className="text-[9px] uppercase tracking-widest text-white/55">{s.label}</span>
           </div>
-          <span className="text-[10px] uppercase tracking-widest text-white/60">Business</span>
-        </div>
-
-        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {[20, 35, 50, 65, 80].map((y, i) => (
-            <motion.circle
-              key={i}
-              r="1.5"
-              fill={color}
-              initial={{ cx: 14, cy: y }}
-              animate={{ cx: [14, 86, 14], cy: [y, 100 - y, y] }}
-              transition={{ duration: 3 + i * 0.3, repeat: Infinity, ease: "linear", delay: i * 0.4 }}
-            />
-          ))}
-          <line x1="14" y1="50" x2="86" y2="50" stroke="white" strokeOpacity="0.12" strokeDasharray="2 2" />
-        </svg>
-
-        <div className="z-10 flex flex-col items-center gap-2">
-          <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/10 backdrop-blur">
-            <svg className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><circle cx="12" cy="8" r="4" /><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6" /></svg>
-          </div>
-          <span className="text-[10px] uppercase tracking-widest text-white/60">Worker</span>
-        </div>
+        ))}
       </div>
-      <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[10px] text-white/60">
-        <div className="rounded-lg bg-white/5 px-2 py-1.5">2,847 matches</div>
-        <div className="rounded-lg bg-white/5 px-2 py-1.5">94% accuracy</div>
-        <div className="rounded-lg bg-white/5 px-2 py-1.5">12s avg</div>
+      <div className="mt-4 rounded-lg border border-[var(--orange-eb)]/30 bg-[var(--orange-eb)]/10 p-2.5 text-[11px] text-white/80">
+        <b className="text-[var(--orange-eb)]">Review</b> is choking throughput: WIP up 3.2× vs Q2. Add 1 reviewer or split queues by risk class.
+      </div>
+    </div>
+  );
+}
+
+function RecommendMock({ color }: { color: string }) {
+  const recs = [
+    { t: "Reassign 2 engineers from Build → Review", impact: "+18% throughput", risk: "Low" },
+    { t: "Auto-route refunds < $200 to bot workflow", impact: "−42% queue", risk: "Low" },
+    { t: "Consolidate vendor portal logins via SSO", impact: "−6 hrs / wk", risk: "Med" },
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-white/50">
+        <span>Ranked recommendations</span>
+        <span className="rounded-full bg-white/10 px-2 py-0.5">Ready to ship</span>
+      </div>
+      <div className="flex-1 space-y-2">
+        {recs.map((r, i) => (
+          <motion.div
+            key={r.t}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 + i * 0.1 }}
+            className="rounded-lg border border-white/10 bg-white/5 p-3 text-[11px]"
+          >
+            <div className="flex items-start gap-2">
+              <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full text-[9px] font-semibold" style={{ background: color, color: "#0d0d0d" }}>{i + 1}</span>
+              <p className="flex-1 text-white/85">{r.t}</p>
+            </div>
+            <div className="mt-2 flex items-center gap-2 pl-7 text-[10px]">
+              <span className="rounded-full bg-[var(--orange-eb)]/15 px-2 py-0.5 text-[var(--orange-eb)]">{r.impact}</span>
+              <span className="rounded-full bg-white/10 px-2 py-0.5 text-white/60">Risk · {r.risk}</span>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   );

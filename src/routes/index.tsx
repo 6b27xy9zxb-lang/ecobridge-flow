@@ -19,10 +19,10 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EcoBridge — One platform. Two crises. One connected solution." },
-      { name: "description", content: "Map Scope 3 emissions, match green talent, close the loop. Built for the green transition." },
-      { property: "og:title", content: "EcoBridge — The operating system for the green transition" },
-      { property: "og:description", content: "ScopeMap measures. CareerShift retrains. The Connector Layer matches them — automatically." },
+      { title: "Northbeam — Turn every report into a decision." },
+      { name: "description", content: "Upload reports, surface bottlenecks, ship the next move. The intelligence layer for modern operations." },
+      { property: "og:title", content: "Northbeam — The intelligence layer for modern operations" },
+      { property: "og:description", content: "Ingest reads your data. Diagnose finds the bottleneck. Recommend ships the move — automatically." },
     ],
   }),
   component: Home,

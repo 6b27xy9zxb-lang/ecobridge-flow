@@ -8,8 +8,8 @@ export function Footer() {
         <div className="md:col-span-2">
           <Logo dark />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
-            The operating system for the green transition. Map emissions, match talent,
-            close the loop — on one connected platform.
+            The intelligence layer for modern operations. Upload a report,
+            surface the bottleneck, ship the next move — on one connected workbench.
           </p>
           <div className="mt-8 flex gap-3">
             <a className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white/70 transition-colors hover:border-white/30 hover:text-white" href="https://github.com" aria-label="GitHub">
@@ -24,9 +24,9 @@ export function Footer() {
         <div>
           <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40">Platform</h4>
           <ul className="mt-5 space-y-3 text-sm text-white/70">
-            <li><a href="/#platform" className="hover:text-white">ScopeMap</a></li>
-            <li><a href="/#platform" className="hover:text-white">CareerShift</a></li>
-            <li><a href="/#platform" className="hover:text-white">Connector</a></li>
+            <li><a href="/#platform" className="hover:text-white">Ingest</a></li>
+            <li><a href="/#platform" className="hover:text-white">Diagnose</a></li>
+            <li><a href="/#platform" className="hover:text-white">Recommend</a></li>
           </ul>
         </div>
 
@@ -35,14 +35,14 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-white/70">
             <li><Link to="/team" className="hover:text-white">Vision</Link></li>
             <li><Link to="/team" className="hover:text-white">Team</Link></li>
-            <li><a href="/#roadmap" className="hover:text-white">Hackathon</a></li>
+            <li><a href="/#roadmap" className="hover:text-white">Roadmap</a></li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-white/5">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-3 px-6 py-6 text-xs text-white/40 md:flex-row md:items-center md:px-8">
-          <p>© {new Date().getFullYear()} EcoBridge. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Northbeam. All rights reserved.</p>
           <p>Built by Team Mindmesh · EDGEIQ 2026</p>
         </div>
       </div>

@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { UserPlus, Sparkles, Briefcase } from "lucide-react";
+import { Upload, Sparkles, ArrowRightCircle } from "lucide-react";
 
 const STEPS = [
-  { icon: UserPlus, title: "Create profile", body: "1-click LinkedIn import or 60-second form. Verified instantly." },
-  { icon: Sparkles, title: "AI matches you", body: "Skill-adjacency engine surfaces green roles you can actually land." },
-  { icon: Briefcase, title: "Get hired", body: "Auto-apply, interview prep, and post-hire reskilling baked in." },
+  { icon: Upload, title: "Drop your reports", body: "PDFs, spreadsheets, exports, pasted notes — everything that lives on your desk today." },
+  { icon: Sparkles, title: "Northbeam reads & models", body: "Tables, charts, prose. Diagnosed against workflow, throughput and resource models." },
+  { icon: ArrowRightCircle, title: "Ship the next move", body: "Ranked recommendations, expected impact, owner and KPI — straight into your tracker." },
 ];
 
 export function HowItWorks() {

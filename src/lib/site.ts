@@ -1,13 +1,18 @@
 // Shared site constants
 export const BRAND = {
-  name: "EcoBridge",
-  tagline: "One platform. Two crises. One connected solution.",
+  name: "Northbeam",
+  tagline: "Turn every report into a decision.",
   team: "Mindmesh",
   hackathon: "EDGEIQ Open Innovation Hackathon 2026",
 };
 
+// Default Gemini key for the in-product AI Analyst (provided by hackathon team).
+// Users can override via the key bar in the demo.
+export const DEFAULT_GEMINI_KEY = "AIzaSyCbmev1LOnmrkvR1Pil6q8pj7Xp0xt1_X4";
+
 export const NAV_LINKS = [
-  { label: "How It Works", href: "#how" },
   { label: "Platform", href: "#platform" },
-  { label: "Demo", href: "#demo" },
+  { label: "How it works", href: "#how" },
+  { label: "Workbench", href: "#demo" },
+  { label: "Pricing", href: "#pricing" },
 ];
