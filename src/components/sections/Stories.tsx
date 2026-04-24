@@ -8,7 +8,7 @@ export function Stories() {
       <div className="mx-auto max-w-7xl px-6 pt-28 md:px-8 md:pt-40">
         <div className="mb-16 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.25em] text-[var(--orange-eb)]">
           <span className="h-px w-8 bg-[var(--orange-eb)]" />
-          How it works · Two journeys
+          How it works · Two stories
         </div>
       </div>
 
@@ -16,26 +16,26 @@ export function Stories() {
         side="left"
         dark
         image={rahul}
-        kicker="Rahul · Procurement Lead, Surat"
-        title="A textile mill maps Scope 3 in 4 hours."
+        kicker="Daniel · COO, mid-market logistics"
+        title="A 38-page Q3 review, decoded in 12 minutes."
         steps={[
-          "Rahul enters supplier spend data into ScopeMap.",
-          "AI reveals his dye supplier drives 62% of Scope 3 emissions.",
-          "EcoBridge surfaces a transitioning procurement manager nearby.",
-          "Rahul hires. Emissions drop 38%. Compliance solved.",
+          "Daniel uploads the Q3 operations report and last week's ticket export.",
+          "Northbeam parses 2,800+ rows and surfaces a queue spike in the Review stage.",
+          "It quantifies the lift: rebalance 2 engineers, throughput +18%, risk low.",
+          "Daniel ships the change Monday. Cycle time drops 4 days by Friday.",
         ]}
       />
 
       <Story
         side="right"
         image={priya}
-        kicker="Priya · Operations Engineer, Pune"
-        title="A career shift in 90 days, not 5 years."
+        kicker="Priya · Head of Strategy, B2B SaaS"
+        title="Cross-team performance gaps, mapped in one session."
         steps={[
-          "Priya connects her LinkedIn in one click.",
-          "CareerShift maps her skills: 81% adjacency to Wind Turbine Tech.",
-          "She receives a personalized 90-day reskilling plan.",
-          "Three local job matches. A new career begins.",
+          "Priya drops in three quarterly reports from Sales, CS and Product.",
+          "Northbeam aligns metrics across teams and flags a churn signal in onboarding.",
+          "Recommendation: collapse two onboarding steps, expected NRR lift +6.2%.",
+          "She walks into the QBR with the playbook already written.",
         ]}
       />
 
@@ -79,7 +79,7 @@ function Story({
             width={1024}
             height={1280}
           />
-          <div className={`absolute inset-0 ${dark ? "bg-gradient-to-t from-[var(--charcoal)]/60 to-transparent" : "bg-gradient-to-t from-black/20 to-transparent"}`} />
+          <div className={`absolute inset-0 ${dark ? "bg-gradient-to-t from-[var(--charcoal)]/70 to-transparent" : "bg-gradient-to-t from-black/25 to-transparent"}`} />
         </motion.div>
 
         <motion.div
@@ -89,7 +89,7 @@ function Story({
           transition={{ duration: 0.8, delay: 0.1 }}
           className="flex flex-col justify-center gap-8 px-6 py-20 md:px-14 md:py-28"
         >
-          <div className={`text-xs font-medium uppercase tracking-[0.25em] ${dark ? "text-[var(--orange-eb)]" : "text-[var(--orange-eb)]"}`}>
+          <div className="text-xs font-medium uppercase tracking-[0.25em] text-[var(--orange-eb)]">
             {kicker}
           </div>
           <h3 className="text-balance text-[clamp(1.8rem,4vw,3.4rem)] font-semibold leading-[1.05] tracking-tight">

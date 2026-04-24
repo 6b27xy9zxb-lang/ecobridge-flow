@@ -2,22 +2,22 @@ import { motion } from "framer-motion";
 
 const ITEMS = [
   {
-    initials: "RA",
-    quote: "We mapped Scope 3 in a morning. By Friday, EcoBridge had pre-shortlisted three candidates for our new ESG role.",
-    name: "Rohit Arora",
-    role: "COO, MetroDye Industries",
+    initials: "DR",
+    quote: "We replaced a 4-hour weekly ops review with a 12-minute Northbeam session. Same decisions, sharper insight, half the room.",
+    name: "Daniel Reyes",
+    role: "COO, Nordcrest Logistics",
   },
   {
     initials: "PI",
-    quote: "I switched from automotive QA to a wind-energy career in 11 weeks. The roadmap was honest about every gap.",
+    quote: "It's like hiring a senior analyst who actually reads every report — and ships the recommendation with an owner attached.",
     name: "Priya Iyer",
-    role: "Wind Tech, Suzlon",
+    role: "Head of Strategy, Vesta SaaS",
   },
   {
     initials: "LK",
-    quote: "Finally a tool that doesn't pretend reporting and reskilling are different problems. They're the same problem.",
+    quote: "Finally a tool that doesn't pretend dashboards are decisions. It reads the data, picks the move, and gets out of the way.",
     name: "Liang Kim",
-    role: "Climate Lead, Aster Capital",
+    role: "Operating Partner, Aster Capital",
   },
 ];
 
@@ -42,7 +42,7 @@ export function Testimonials() {
               <svg className="h-6 w-6 text-[var(--orange-eb)]" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4H7c0 2 1 4 4 4v3c-4 0-7-3-7-7V7Zm9 0h4v4h-4c0 2 1 4 4 4v3c-4 0-7-3-7-7V7Z" /></svg>
               <blockquote className="mt-4 text-base leading-relaxed text-white/85">“{t.quote}”</blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-full text-xs font-semibold" style={{ background: "linear-gradient(135deg, var(--orange-eb), var(--sage))" }}>{t.initials}</div>
+                <div className="grid h-10 w-10 place-items-center rounded-full text-xs font-semibold text-white" style={{ background: "linear-gradient(135deg, var(--violet), var(--violet-glow))" }}>{t.initials}</div>
                 <div>
                   <p className="text-sm font-medium">{t.name}</p>
                   <p className="text-xs text-white/50">{t.role}</p>

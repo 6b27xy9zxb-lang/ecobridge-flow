@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const PHASES = [
-  { tag: "Phase 01", title: "High-pressure sectors", body: "Textiles, manufacturing, logistics — strongest regulatory push." },
-  { tag: "Phase 02", title: "Adjacent industries", body: "Agriculture, construction, energy — replicate the playbook." },
-  { tag: "Phase 03", title: "Global markets", body: "India (BRSR) → EU (CSRD) → worldwide rollout." },
-  { tag: "Ecosystem", title: "Open platform", body: "EdTech, ESG firms, government funds plug in directly." },
+  { tag: "Phase 01", title: "Operations & Strategy teams", body: "Mid-market COOs, Heads of Strategy, Ops leads — the people drowning in reports today." },
+  { tag: "Phase 02", title: "Cross-functional rollouts", body: "Sales, CS, Product, Finance — one workbench, one reasoning layer across the company." },
+  { tag: "Phase 03", title: "Embedded analyst API", body: "Northbeam reasoning available inside Notion, Linear, Slack and your own products." },
+  { tag: "Ecosystem", title: "Open analyst platform", body: "BI vendors, consultancies and PE firms plug their data and playbooks directly in." },
 ];
 
 export function Roadmap() {
@@ -13,10 +13,10 @@ export function Roadmap() {
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="mb-12 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.25em] text-[var(--orange-eb)]">
           <span className="h-px w-8 bg-[var(--orange-eb)]" />
-          Scaling Roadmap
+          Roadmap
         </div>
         <h2 className="max-w-3xl text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.02] tracking-tight">
-          A path from <span className="text-[var(--orange-eb)]">hackathon</span> to global infrastructure.
+          A path from <span className="text-[var(--orange-eb)]">workbench</span> to operating layer.
         </h2>
 
         <div className="relative mt-16">

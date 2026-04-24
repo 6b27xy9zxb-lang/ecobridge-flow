@@ -2,24 +2,24 @@ import { motion } from "framer-motion";
 
 const LAYERS = [
   {
-    name: "Input",
-    color: "var(--sage)",
-    items: ["Supplier spend data", "LinkedIn OAuth", "EPA factors", "O*NET skills", "IRENA jobs DB"],
+    name: "Sources",
+    color: "var(--violet-glow)",
+    items: ["PDF / DOCX uploads", "XLSX, CSV, JSON", "BI exports (Looker, Tableau)", "Pasted prose & notes", "Webhook ingest"],
   },
   {
-    name: "AI Processing",
+    name: "AI Reasoning",
     color: "var(--orange-eb)",
-    items: ["Emissions Classifier", "Skills Extractor", "Roadmap Generator"],
+    items: ["Document parser (Gemini)", "Workflow & throughput models", "Variance & drift detection", "Recommendation ranker"],
   },
   {
-    name: "Platform Modules",
-    color: "var(--cream)",
-    items: ["D3 Supply Chain Viz", "Skills Radar", "Matching Layer"],
+    name: "Workbench",
+    color: "var(--mist)",
+    items: ["Insight feed", "KPI workspace", "AI Analyst chat", "Action tracker"],
   },
   {
     name: "Infrastructure",
     color: "white",
-    items: ["React + Vite + Tailwind", "Node.js + Express", "Vercel + Railway"],
+    items: ["React + TanStack Start", "Edge functions", "Postgres + vector store", "SOC 2-aligned encryption"],
   },
 ];
 
@@ -67,7 +67,7 @@ export function Architecture() {
         </div>
 
         <div className="mt-12 flex flex-wrap gap-2">
-          {["EPA emissions factors", "O*NET skills database", "IRENA green jobs", "LinkedIn API", "OpenAI", "Postgres"].map((d, i) => (
+          {["Gemini 1.5 Flash", "OpenAI", "LangChain", "Postgres + pgvector", "ClickHouse", "Vercel + Cloudflare"].map((d, i) => (
             <motion.span
               key={d}
               initial={{ opacity: 0 }}

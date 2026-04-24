@@ -2,16 +2,16 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const NODES = [
-  { label: "Businesses", angle: 0 },
-  { label: "Demand", angle: 90 },
-  { label: "Workers", angle: 180 },
-  { label: "Supply", angle: 270 },
+  { label: "Ingest", angle: 0 },
+  { label: "Model", angle: 90 },
+  { label: "Diagnose", angle: 180 },
+  { label: "Act", angle: 270 },
 ];
 
 const STATS = [
-  { k: "Demand signals", v: "Every company mapping emissions generates visible talent demand." },
-  { k: "Supply creation", v: "Every worker transition helps businesses they have never met." },
-  { k: "Zero friction", v: "LinkedIn-native onboarding. Workers join in seconds, not hours." },
+  { k: "Compounding context", v: "Every report you ingest sharpens the next diagnosis. Models learn your operation, not the average one." },
+  { k: "Closed-loop feedback", v: "Mark a recommendation as shipped. Northbeam tracks the metric and updates the playbook automatically." },
+  { k: "From signal to ticket", v: "Recommendations come pre-scoped: owner, expected impact, and the KPI to watch — straight into your tracker." },
 ];
 
 export function Flywheel() {
@@ -22,12 +22,12 @@ export function Flywheel() {
   return (
     <section className="relative overflow-hidden bg-[var(--charcoal)] py-28 text-white md:py-40" ref={ref}>
       <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute left-1/2 top-1/2 -z-0 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(92,122,92,0.18)_0%,transparent_55%)]" />
+      <div className="absolute left-1/2 top-1/2 -z-0 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.18)_0%,transparent_55%)]" />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-8">
         <div className="mb-14 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.25em] text-[var(--orange-eb)]">
           <span className="h-px w-8 bg-[var(--orange-eb)]" />
-          The Flywheel
+          The Loop
         </div>
 
         <div className="grid items-center gap-16 md:grid-cols-2">
@@ -35,8 +35,8 @@ export function Flywheel() {
             <svg viewBox="0 0 400 400" className="h-[min(70vw,440px)] w-[min(70vw,440px)]">
               <defs>
                 <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="60%" stopColor="rgba(255,77,0,0)" />
-                  <stop offset="100%" stopColor="rgba(255,77,0,0.3)" />
+                  <stop offset="60%" stopColor="rgba(124,58,237,0)" />
+                  <stop offset="100%" stopColor="rgba(124,58,237,0.3)" />
                 </radialGradient>
               </defs>
               <circle cx={cx} cy={cy} r={r + 30} fill="url(#ringGlow)" />
@@ -48,7 +48,6 @@ export function Flywheel() {
                 animate={inView ? { strokeDashoffset: 0 } : {}}
                 transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
               />
-              {/* Rotating arrows */}
               {[0, 90, 180, 270].map((a) => (
                 <motion.g
                   key={a}
@@ -61,7 +60,6 @@ export function Flywheel() {
                   <path d={`M${cx + r - 8},${cy - 6} l8,6 l-8,6`} fill="none" stroke="var(--orange-eb)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </motion.g>
               ))}
-              {/* Nodes */}
               {NODES.map((n, i) => {
                 const rad = (n.angle * Math.PI) / 180;
                 const x = cx + r * Math.cos(rad);
@@ -79,8 +77,8 @@ export function Flywheel() {
                   </motion.g>
                 );
               })}
-              <text x={cx} y={cy - 4} textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Network</text>
-              <text x={cx} y={cy + 14} textAnchor="middle" fill="white" fillOpacity="0.5" fontSize="10" letterSpacing="2">EFFECT</text>
+              <text x={cx} y={cy - 4} textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Decision</text>
+              <text x={cx} y={cy + 14} textAnchor="middle" fill="white" fillOpacity="0.5" fontSize="10" letterSpacing="2">LOOP</text>
             </svg>
           </div>
 
@@ -108,7 +106,7 @@ export function Flywheel() {
           transition={{ duration: 0.8 }}
           className="mx-auto mt-24 max-w-3xl text-balance text-center text-[clamp(1.6rem,3.5vw,2.6rem)] font-light leading-snug tracking-tight text-white/90 md:mt-32"
         >
-          “This is a network effect. <span className="italic text-[var(--orange-eb)]">Not two tools sharing a homepage.</span>”
+          “A dashboard tells you what happened. <span className="italic text-[var(--orange-eb)]">Northbeam tells you what to do next.</span>”
         </motion.blockquote>
       </div>
     </section>
