@@ -54,6 +54,11 @@
   --color-orange-eb: var(--orange-eb);
   --color-sage: var(--sage);
   --color-orange-glow: var(--orange-glow);
+  --color-obsidian: var(--obsidian);
+  --color-violet-eb: var(--violet);
+  --color-violet-glow: var(--violet-glow);
+  --color-mist: var(--mist);
+  --color-graphite: var(--graphite);
 }
 
 :root {
