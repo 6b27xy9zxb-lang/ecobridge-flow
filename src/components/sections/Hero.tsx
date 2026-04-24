@@ -33,7 +33,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--orange-eb)] opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--orange-eb)]" />
           </span>
-          EDGEIQ Hackathon 2026 · Live demo
+          EDGEIQ Hackathon 2026 · Live analytics demo
         </motion.div>
 
         <h1 className="mt-8 max-w-[18ch] text-balance text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
