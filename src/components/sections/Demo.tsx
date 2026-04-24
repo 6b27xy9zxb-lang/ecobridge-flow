@@ -648,27 +648,12 @@ function ChatFlow() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={() => setShowKey(!showKey)} className="rounded-full border border-white/15 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/5">
-            {showKey ? "Hide key" : "API key"}
-          </button>
+          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] text-white/60">Powered by Lovable AI</span>
           {messages.length > 0 && (
             <button onClick={() => setMessages([])} className="rounded-full bg-white/5 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/10">Clear</button>
           )}
         </div>
       </div>
-
-      {showKey && (
-        <div className="flex flex-col gap-2 border-b border-white/5 bg-white/[0.02] px-6 py-3 md:flex-row md:items-center md:px-10">
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Paste your Gemini API key (default key already loaded)"
-            className="flex-1 rounded-md bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none"
-          />
-          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/5">Get free key →</a>
-        </div>
-      )}
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-6 py-8 md:px-10" style={{ maxHeight: 460 }}>
