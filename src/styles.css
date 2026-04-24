@@ -59,12 +59,22 @@
 :root {
   --radius: 0.75rem;
 
-  /* EcoBridge palette in oklch */
-  --charcoal: oklch(0.16 0 0);          /* #0D0D0D */
-  --cream: oklch(0.953 0.014 80);       /* #F5F0E8 */
-  --orange-eb: oklch(0.68 0.22 38);     /* #FF4D00 */
-  --orange-glow: oklch(0.74 0.21 45);
-  --sage: oklch(0.55 0.05 145);         /* #5C7A5C */
+  /* EcoBridge palette — Obsidian / Violet analytics rebrand
+     Legacy token names retained as aliases so existing components recolor automatically. */
+  --obsidian: oklch(0.14 0.012 280);            /* deep near-black with cool cast */
+  --obsidian-deep: oklch(0.09 0.012 280);
+  --graphite: oklch(0.28 0.012 280);
+  --mist: oklch(0.965 0.006 280);               /* soft white */
+  --violet: oklch(0.62 0.22 295);               /* primary accent #7C3AED-ish */
+  --violet-glow: oklch(0.72 0.20 300);
+  --violet-deep: oklch(0.45 0.22 290);
+
+  /* Legacy aliases — kept so existing classes (var(--charcoal), var(--orange-eb)…) restyle in place */
+  --charcoal: var(--obsidian);
+  --cream: var(--mist);
+  --orange-eb: var(--violet);
+  --orange-glow: var(--violet-glow);
+  --sage: var(--graphite);
 
   --background: var(--cream);
   --foreground: var(--charcoal);
