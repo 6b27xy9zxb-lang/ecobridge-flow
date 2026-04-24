@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell, LineChart, Line, CartesianGrid } from "recharts";
 import { Upload, FileText, Send, Sparkles, AlertTriangle, TrendingUp, Paperclip, X } from "lucide-react";
-import { DEFAULT_GEMINI_KEY } from "@/lib/site";
+import { callAi } from "@/utils/ai.functions";
 
 type Tab = "analyze" | "workspace" | "talent" | "chat";
 
@@ -74,31 +74,52 @@ export function Demo() {
 }
 
 /* ============================================================
-   GEMINI HELPER
+   AI HELPER — routes through Lovable AI Gateway via server fn
    ============================================================ */
 
+type GeminiPart = { text?: string; inline_data?: { mime_type: string; data: string } };
+type GeminiContent = { role: "user" | "model"; parts: GeminiPart[] };
+
 async function callGemini(opts: {
-  apiKey: string;
+  apiKey?: string; // ignored — kept for backwards compatibility
   system: string;
-  contents: { role: "user" | "model"; parts: { text?: string; inline_data?: { mime_type: string; data: string } }[] }[];
+  contents: GeminiContent[];
   json?: boolean;
 }) {
-  const { apiKey, system, contents, json } = opts;
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents,
-        systemInstruction: { parts: [{ text: system }] },
-        generationConfig: json ? { responseMimeType: "application/json" } : undefined,
-      }),
+  const { system, contents, json } = opts;
+
+  // Convert Gemini-style contents → OpenAI-style messages for Lovable AI
+  const messages = contents.map((c) => {
+    const role = c.role === "model" ? "assistant" : "user";
+    const textParts = c.parts.filter((p) => p.text).map((p) => p.text as string);
+    const mediaParts = c.parts.filter((p) => p.inline_data);
+
+    if (mediaParts.length === 0) {
+      return { role, content: textParts.join("\n\n") } as const;
     }
-  );
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.error?.message || "Gemini request failed");
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+    const content: Array<
+      | { type: "text"; text: string }
+      | { type: "image_url"; image_url: { url: string } }
+    > = [];
+    if (textParts.length) content.push({ type: "text", text: textParts.join("\n\n") });
+    for (const m of mediaParts) {
+      const d = m.inline_data!;
+      content.push({
+        type: "image_url",
+        image_url: { url: `data:${d.mime_type};base64,${d.data}` },
+      });
+    }
+    return { role, content } as const;
+  });
+
+  const result = await callAi({ data: { system, messages: messages as any, json } });
+  if (!result.ok) throw new Error(result.error);
+  let text = result.text || "";
+  if (json) {
+    // Strip ``` fences if model adds them despite response_format
+    text = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "");
+  }
+  return text;
 }
 
 function fileToBase64(file: File): Promise<string> {
@@ -161,7 +182,7 @@ function AnalyzeFlow() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const apiKey = (typeof window !== "undefined" && localStorage.getItem("northbeam_gemini_key")) || DEFAULT_GEMINI_KEY;
+  
 
   const handleFile = async (f: File) => {
     setFile(f);
@@ -215,7 +236,6 @@ Be specific. Reference actual numbers from the report. Avoid fluff. Avoid sustai
       if (parts.length === 0) parts.push({ text: sourceText });
 
       const raw = await callGemini({
-        apiKey,
         system,
         contents: [{ role: "user", parts }],
         json: true,
@@ -567,8 +587,6 @@ const PROMPT_CHIPS = [
 ];
 
 function ChatFlow() {
-  const [apiKey, setApiKey] = useState("");
-  const [showKey, setShowKey] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -578,21 +596,11 @@ function ChatFlow() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem("northbeam_gemini_key") : null;
-    setApiKey(stored || DEFAULT_GEMINI_KEY);
-  }, []);
-
-  useEffect(() => {
-    if (apiKey && apiKey !== DEFAULT_GEMINI_KEY) localStorage.setItem("northbeam_gemini_key", apiKey);
-  }, [apiKey]);
-
-  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
   const send = async (text: string) => {
     if (!text.trim() && !pendingFile) return;
-    if (!apiKey) { setError("Add a Gemini API key first."); return; }
     setError(null);
 
     const attachmentLabel = pendingFile ? `📎 ${pendingFile.name}` : undefined;
@@ -618,7 +626,7 @@ function ChatFlow() {
         return { role: m.role, parts };
       }));
 
-      const reply = await callGemini({ apiKey, system: SYSTEM_PROMPT, contents });
+      const reply = await callGemini({ system: SYSTEM_PROMPT, contents });
       setMessages((m) => [...m, { role: "model", text: reply || "(no reply)" }]);
       setPendingFile(null);
     } catch (e: any) {
@@ -640,27 +648,12 @@ function ChatFlow() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={() => setShowKey(!showKey)} className="rounded-full border border-white/15 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/5">
-            {showKey ? "Hide key" : "API key"}
-          </button>
+          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] text-white/60">Powered by Lovable AI</span>
           {messages.length > 0 && (
             <button onClick={() => setMessages([])} className="rounded-full bg-white/5 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/10">Clear</button>
           )}
         </div>
       </div>
-
-      {showKey && (
-        <div className="flex flex-col gap-2 border-b border-white/5 bg-white/[0.02] px-6 py-3 md:flex-row md:items-center md:px-10">
-          <input
-            type="password"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            placeholder="Paste your Gemini API key (default key already loaded)"
-            className="flex-1 rounded-md bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:outline-none"
-          />
-          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-[11px] text-white/70 hover:bg-white/5">Get free key →</a>
-        </div>
-      )}
 
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-6 py-8 md:px-10" style={{ maxHeight: 460 }}>
@@ -852,7 +845,7 @@ const TALENT_PRESETS = [
 ];
 
 function TalentFlow() {
-  const [apiKey, setApiKey] = useState(DEFAULT_GEMINI_KEY);
+  // AI calls now route through Lovable AI Gateway server fn — no key needed.
   const [role, setRole] = useState(TALENT_PRESETS[0].role);
   const [team, setTeam] = useState(TALENT_PRESETS[0].team);
   const [headcount, setHeadcount] = useState(TALENT_PRESETS[0].headcount);
@@ -898,7 +891,6 @@ Location preference: ${location}
 Suggest 6 ranked LinkedIn-style candidates.`;
 
       const text = await callGemini({
-        apiKey,
         system,
         contents: [{ role: "user", parts: [{ text: userMsg }] }],
         json: true,
@@ -947,14 +939,7 @@ Suggest 6 ranked LinkedIn-style candidates.`;
           <Field label="Required skills" value={skills} onChange={setSkills} multiline />
         </div>
 
-        <details className="mt-4">
-          <summary className="cursor-pointer text-[10px] uppercase tracking-widest text-white/40">Gemini key</summary>
-          <input value={apiKey} onChange={(e) => setApiKey(e.target.value)} type="password"
-            className="mt-2 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:border-[var(--orange-eb)] focus:outline-none"
-            placeholder="AIza..." />
-        </details>
-
-        <button onClick={findTalent} disabled={loading || !apiKey}
+        <button onClick={findTalent} disabled={loading}
           className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_var(--orange-eb)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50">
           {loading ? (<><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> Sourcing…</>) : (<><Sparkles className="h-4 w-4" /> Find candidates</>)}
         </button>
