@@ -5,14 +5,14 @@ const PLANS = [
   {
     name: "Free",
     price: "$0",
-    sub: "For solo workers exploring the green economy.",
+    sub: "For individuals exploring the transition economy.",
     features: ["LinkedIn profile import", "1 career match report", "AI advisor (10 msg/day)"],
     cta: "Start free",
   },
   {
     name: "Pro",
     price: "$29",
-    sub: "For active job-seekers and SMEs going green.",
+    sub: "For active job-seekers and SMEs in transition.",
     features: ["Unlimited career matches", "90-day reskilling roadmap", "Scope 1/2/3 emissions mapping", "CSRD + BRSR exports", "Priority AI advisor"],
     cta: "Start Pro trial",
     popular: true,
