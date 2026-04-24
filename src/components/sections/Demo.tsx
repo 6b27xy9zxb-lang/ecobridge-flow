@@ -845,7 +845,7 @@ const TALENT_PRESETS = [
 ];
 
 function TalentFlow() {
-  const [apiKey, setApiKey] = useState(DEFAULT_GEMINI_KEY);
+  // AI calls now route through Lovable AI Gateway server fn — no key needed.
   const [role, setRole] = useState(TALENT_PRESETS[0].role);
   const [team, setTeam] = useState(TALENT_PRESETS[0].team);
   const [headcount, setHeadcount] = useState(TALENT_PRESETS[0].headcount);
