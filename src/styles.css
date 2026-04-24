@@ -95,24 +95,25 @@
   --border: oklch(0.88 0.01 80);
   --input: oklch(0.88 0.01 80);
   --ring: var(--orange-eb);
-  --chart-1: var(--orange-eb);
-  --chart-2: var(--sage);
-  --chart-3: oklch(0.45 0.18 30);
-  --chart-4: oklch(0.7 0.15 75);
-  --chart-5: oklch(0.4 0.05 145);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: var(--charcoal);
-  --sidebar-primary: var(--orange-eb);
+  --chart-1: var(--violet);
+  --chart-2: var(--violet-glow);
+  --chart-3: oklch(0.55 0.18 270);
+  --chart-4: oklch(0.7 0.14 220);
+  --chart-5: var(--graphite);
+  --sidebar: oklch(0.984 0.003 280);
+  --sidebar-foreground: var(--obsidian);
+  --sidebar-primary: var(--violet);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0.01 80);
-  --sidebar-accent-foreground: var(--charcoal);
-  --sidebar-border: oklch(0.88 0.01 80);
-  --sidebar-ring: var(--orange-eb);
+  --sidebar-accent: oklch(0.96 0.005 280);
+  --sidebar-accent-foreground: var(--obsidian);
+  --sidebar-border: oklch(0.9 0.005 280);
+  --sidebar-ring: var(--violet);
 
-  --gradient-orange: linear-gradient(135deg, oklch(0.68 0.22 38), oklch(0.74 0.21 50));
-  --gradient-dark: linear-gradient(180deg, oklch(0.16 0 0), oklch(0.10 0 0));
-  --shadow-elegant: 0 30px 80px -30px color-mix(in oklab, var(--orange-eb) 35%, transparent);
-  --shadow-glass: 0 10px 40px -10px oklch(0 0 0 / 0.4);
+  --gradient-orange: linear-gradient(135deg, var(--violet), var(--violet-glow));
+  --gradient-violet: linear-gradient(135deg, var(--violet-deep), var(--violet-glow));
+  --gradient-dark: linear-gradient(180deg, var(--obsidian), var(--obsidian-deep));
+  --shadow-elegant: 0 30px 80px -30px color-mix(in oklab, var(--violet) 45%, transparent);
+  --shadow-glass: 0 10px 40px -10px oklch(0 0 0 / 0.5);
 }
 
 .dark {
