@@ -63,6 +63,7 @@ export function Demo() {
             >
               {tab === "analyze" && <AnalyzeFlow />}
               {tab === "workspace" && <WorkspaceFlow />}
+              {tab === "talent" && <TalentFlow />}
               {tab === "chat" && <ChatFlow />}
             </motion.div>
           </AnimatePresence>
