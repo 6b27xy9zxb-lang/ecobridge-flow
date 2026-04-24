@@ -47,7 +47,7 @@ export function Demo() {
             <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
             <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
             <div className="mx-auto rounded-md bg-white/5 px-3 py-1 text-[11px] text-white/50">
-              app.northbeam.io / {tab}
+              app.ecobridge.io / {tab}
             </div>
           </div>
 
