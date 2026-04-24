@@ -587,8 +587,6 @@ const PROMPT_CHIPS = [
 ];
 
 function ChatFlow() {
-  const [apiKey, setApiKey] = useState("");
-  const [showKey, setShowKey] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -598,21 +596,11 @@ function ChatFlow() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const stored = typeof window !== "undefined" ? localStorage.getItem("northbeam_gemini_key") : null;
-    setApiKey(stored || DEFAULT_GEMINI_KEY);
-  }, []);
-
-  useEffect(() => {
-    if (apiKey && apiKey !== DEFAULT_GEMINI_KEY) localStorage.setItem("northbeam_gemini_key", apiKey);
-  }, [apiKey]);
-
-  useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
   const send = async (text: string) => {
     if (!text.trim() && !pendingFile) return;
-    if (!apiKey) { setError("Add a Gemini API key first."); return; }
     setError(null);
 
     const attachmentLabel = pendingFile ? `📎 ${pendingFile.name}` : undefined;
@@ -638,7 +626,7 @@ function ChatFlow() {
         return { role: m.role, parts };
       }));
 
-      const reply = await callGemini({ apiKey, system: SYSTEM_PROMPT, contents });
+      const reply = await callGemini({ system: SYSTEM_PROMPT, contents });
       setMessages((m) => [...m, { role: "model", text: reply || "(no reply)" }]);
       setPendingFile(null);
     } catch (e: any) {
