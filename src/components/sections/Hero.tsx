@@ -2,7 +2,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const HEADLINE = ["The", "intelligence", "layer", "for", "the", "green", "transition."];
+const HEADLINE = ["The", "intelligence", "layer", "for", "modern", "operations."];
+const METRICS = [
+  { k: "12.8%", v: "Avg. throughput lift" },
+  { k: "37 min", v: "Report → decision" },
+  { k: "94%", v: "Recommendation accept rate" },
+];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,12 +18,10 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative isolate min-h-[100svh] overflow-hidden bg-[var(--charcoal)] text-white">
-      {/* Background image */}
       <motion.div style={{ y, opacity, scale }} className="absolute inset-0 -z-10">
-        <img src={heroBg} alt="" className="h-full w-full object-cover opacity-50" width={1920} height={1080} />
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--charcoal)]/40 via-[var(--charcoal)]/60 to-[var(--charcoal)]" />
+        <img src={heroBg} alt="" className="h-full w-full object-cover opacity-45" width={1920} height={1080} />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--charcoal)]/55 via-[var(--charcoal)]/70 to-[var(--charcoal)]" />
         <div className="absolute inset-0 grid-bg opacity-40" />
-        {/* radial glow */}
         <div className="absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.22)_0%,transparent_60%)]" />
       </motion.div>
 
@@ -33,10 +36,10 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--orange-eb)] opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--orange-eb)]" />
           </span>
-          EDGEIQ Hackathon 2026 · Live analytics demo
+          EDGEIQ Hackathon 2026 · Live analyst workbench
         </motion.div>
 
-        <h1 className="mt-8 max-w-[18ch] text-balance text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+        <h1 className="mt-8 max-w-[20ch] text-balance text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
           {HEADLINE.map((w, i) => (
             <motion.span
               key={i}
@@ -54,9 +57,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8 }}
-          className="mt-6 text-[clamp(1.6rem,3.5vw,2.6rem)] font-light tracking-tight text-white/90"
+          className="mt-6 text-[clamp(1.4rem,3vw,2.2rem)] font-light tracking-tight text-white/90"
         >
-          One platform. <span className="text-[var(--violet-glow)] italic">Measured.</span>
+          Upload a report. <span className="text-[var(--violet-glow)] italic">Get the next move.</span>
         </motion.p>
 
         <motion.p
@@ -65,8 +68,9 @@ export function Hero() {
           transition={{ delay: 1.7, duration: 1 }}
           className="mt-6 max-w-xl text-sm leading-relaxed text-white/55 md:text-base"
         >
-          A unified analytics platform that maps Scope 3 emissions, models workforce capability,
-          and routes the two together — in real time. Built for operations, strategy, and ESG teams.
+          Northbeam reads your operational reports, dashboards and process data,
+          then surfaces the bottlenecks, inefficiencies and resource shifts that
+          actually move the number — with recommendations your team can ship this week.
         </motion.p>
 
         <motion.div
@@ -76,16 +80,30 @@ export function Hero() {
           className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
           <a href="#demo" className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-6 py-3.5 text-sm font-medium text-white shadow-[0_20px_50px_-15px_var(--orange-eb)] transition-all hover:scale-[1.02]">
-            Launch the platform
+            Open the workbench
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
           </a>
           <a href="#platform" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10">
-            See the architecture
+            See how it thinks
           </a>
+        </motion.div>
+
+        {/* Inline KPI strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.1, duration: 0.9 }}
+          className="mt-16 grid max-w-3xl grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur"
+        >
+          {METRICS.map((m) => (
+            <div key={m.v} className="px-5 py-5">
+              <p className="text-2xl font-semibold tracking-tight md:text-3xl">{m.k}</p>
+              <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/45">{m.v}</p>
+            </div>
+          ))}
         </motion.div>
       </div>
 
-      {/* Scroll cue */}
       <motion.div
         style={{ opacity }}
         className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40"

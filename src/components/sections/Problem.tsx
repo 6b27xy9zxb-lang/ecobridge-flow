@@ -1,5 +1,11 @@
 import { motion } from "framer-motion";
 
+const SIGNALS = [
+  { k: "68%", v: "of operational reports are read once and never acted on." },
+  { k: "11 hrs", v: "median weekly time analysts spend reformatting data." },
+  { k: "$1.3T", v: "lost annually to undetected workflow bottlenecks." },
+];
+
 export function Problem() {
   return (
     <section className="relative bg-[var(--cream)] py-28 md:py-40">
@@ -21,16 +27,17 @@ export function Problem() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative overflow-hidden rounded-3xl bg-white p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)] md:p-12"
+            className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.2)] md:p-12"
           >
             <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[var(--orange-eb)]/10 blur-2xl" />
-            <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">Workers</p>
-            <p className="mt-6 text-[clamp(3rem,7vw,5.5rem)] font-semibold leading-none tracking-tight text-[var(--charcoal)]">
-              500M+
+            <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">Operators</p>
+            <p className="mt-6 text-[clamp(1.6rem,3vw,2.4rem)] font-semibold leading-tight tracking-tight text-[var(--charcoal)]">
+              Drowning in dashboards. <span className="text-[var(--charcoal)]/55">Starved of decisions.</span>
             </p>
             <p className="mt-6 max-w-md text-base leading-relaxed text-[var(--charcoal)]/70">
-              workers in carbon-disrupted industries with no clear path to a green career.
-              Most never get matched, retrained, or seen.
+              Reports stack up faster than anyone can read them. The signal is in there —
+              the workflow that's slipping, the queue that's choking throughput — but no
+              one has time to find it.
             </p>
           </motion.div>
 
@@ -39,18 +46,35 @@ export function Problem() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="group relative overflow-hidden rounded-3xl bg-[var(--charcoal)] p-8 text-white shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)] md:p-12"
+            className="relative overflow-hidden rounded-3xl bg-[var(--charcoal)] p-8 text-white shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)] md:p-12"
           >
-            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[var(--sage)]/30 blur-2xl" />
-            <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">Businesses</p>
+            <div className="absolute -left-16 -bottom-16 h-48 w-48 rounded-full bg-[var(--violet)]/30 blur-2xl" />
+            <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">Leadership</p>
             <p className="mt-6 text-[clamp(1.6rem,3vw,2.4rem)] font-semibold leading-tight tracking-tight">
-              EU CSRD + India BRSR now mandate <span className="text-[var(--orange-eb)]">Scope 3</span> reporting.
+              Strategy moves at the speed of <span className="text-[var(--orange-eb)]">analysis</span>.
             </p>
             <p className="mt-6 max-w-md text-base leading-relaxed text-white/65">
-              Most SMEs have zero visibility into which suppliers drive their emissions —
-              and zero way to source the talent that could fix them.
+              Most teams wait two weeks for a deck that summarizes what already happened.
+              The window to act has closed. The competitor already moved.
             </p>
           </motion.div>
+        </div>
+
+        {/* Signals strip */}
+        <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-[var(--charcoal)]/10 bg-[var(--charcoal)]/10 md:grid-cols-3">
+          {SIGNALS.map((s, i) => (
+            <motion.div
+              key={s.v}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="bg-white p-8"
+            >
+              <p className="text-[clamp(2rem,4vw,3rem)] font-semibold tracking-tight text-[var(--charcoal)]">{s.k}</p>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--charcoal)]/65">{s.v}</p>
+            </motion.div>
+          ))}
         </div>
 
         <motion.h2
@@ -60,8 +84,8 @@ export function Problem() {
           transition={{ duration: 0.9, delay: 0.2 }}
           className="mx-auto mt-24 max-w-4xl text-balance text-center text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.05] tracking-tight text-[var(--charcoal)] md:mt-32"
         >
-          Two crises. Zero shared infrastructure.{" "}
-          <span className="italic text-[var(--orange-eb)]">Until now.</span>
+          The data is already on your desk.{" "}
+          <span className="italic text-[var(--orange-eb)]">The decision isn't.</span>
         </motion.h2>
       </div>
     </section>
