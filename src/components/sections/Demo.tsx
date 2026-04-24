@@ -4,7 +4,7 @@ import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell, LineCh
 import { Upload, FileText, Send, Sparkles, AlertTriangle, TrendingUp, Paperclip, X } from "lucide-react";
 import { DEFAULT_GEMINI_KEY } from "@/lib/site";
 
-type Tab = "analyze" | "workspace" | "chat";
+type Tab = "analyze" | "workspace" | "talent" | "chat";
 
 export function Demo() {
   const [tab, setTab] = useState<Tab>("analyze");
