@@ -76,11 +76,11 @@ export function Hero() {
           className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
           <a href="#demo" className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-6 py-3.5 text-sm font-medium text-white shadow-[0_20px_50px_-15px_var(--orange-eb)] transition-all hover:scale-[1.02]">
-            Map Your Emissions
+            Launch the platform
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
           </a>
-          <a href="#demo" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10">
-            Find Green Careers
+          <a href="#platform" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10">
+            See the architecture
           </a>
         </motion.div>
       </div>
