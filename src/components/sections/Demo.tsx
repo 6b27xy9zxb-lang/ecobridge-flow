@@ -24,6 +24,7 @@ export function Demo() {
             {([
               { id: "analyze", label: "Analyze a report" },
               { id: "workspace", label: "Live workspace" },
+              { id: "talent", label: "Talent match" },
               { id: "chat", label: "AI Analyst" },
             ] as { id: Tab; label: string }[]).map((t) => (
               <button
