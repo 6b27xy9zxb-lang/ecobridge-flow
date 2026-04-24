@@ -182,7 +182,7 @@ function AnalyzeFlow() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const apiKey = (typeof window !== "undefined" && localStorage.getItem("northbeam_gemini_key")) || DEFAULT_GEMINI_KEY;
+  
 
   const handleFile = async (f: File) => {
     setFile(f);
