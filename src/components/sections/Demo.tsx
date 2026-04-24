@@ -939,14 +939,7 @@ Suggest 6 ranked LinkedIn-style candidates.`;
           <Field label="Required skills" value={skills} onChange={setSkills} multiline />
         </div>
 
-        <details className="mt-4">
-          <summary className="cursor-pointer text-[10px] uppercase tracking-widest text-white/40">Gemini key</summary>
-          <input value={apiKey} onChange={(e) => setApiKey(e.target.value)} type="password"
-            className="mt-2 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:border-[var(--orange-eb)] focus:outline-none"
-            placeholder="AIza..." />
-        </details>
-
-        <button onClick={findTalent} disabled={loading || !apiKey}
+        <button onClick={findTalent} disabled={loading}
           className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_var(--orange-eb)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50">
           {loading ? (<><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> Sourcing…</>) : (<><Sparkles className="h-4 w-4" /> Find candidates</>)}
         </button>
