@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const STATS = [
-  { v: 50000, suffix: "+", label: "Green jobs surfaced" },
+  { v: 50000, suffix: "+", label: "Roles indexed" },
   { v: 1200, suffix: "+", label: "Companies onboarded" },
   { v: 94, suffix: "%", label: "Match accuracy" },
   { v: 180, suffix: "+", label: "Countries served" },

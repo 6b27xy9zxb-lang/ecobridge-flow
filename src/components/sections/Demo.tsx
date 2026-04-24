@@ -296,7 +296,7 @@ function BusinessResults({ onReset }: { onReset: () => void }) {
               <Tooltip contentStyle={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, fontSize: 12 }} />
               <Bar dataKey="v" radius={[6, 6, 0, 0]}>
                 {EMISSIONS_DATA.map((d, i) => (
-                  <Cell key={i} fill={d.level === "high" ? "#FF4D00" : d.level === "med" ? "#f0a050" : "#5C7A5C"} />
+                  <Cell key={i} fill={d.level === "high" ? "#7C3AED" : d.level === "med" ? "#A78BFA" : "#3F3F5C"} />
                 ))}
               </Bar>
             </BarChart>
@@ -552,7 +552,7 @@ function WorkerResults({ onReset }: { onReset: () => void }) {
                 <PolarGrid stroke="rgba(255,255,255,0.1)" />
                 <PolarAngleAxis dataKey="skill" stroke="rgba(255,255,255,0.5)" fontSize={10} />
                 <PolarRadiusAxis stroke="rgba(255,255,255,0.1)" tick={false} axisLine={false} />
-                <Radar dataKey="v" stroke="#FF4D00" fill="#FF4D00" fillOpacity={0.3} />
+                <Radar dataKey="v" stroke="#7C3AED" fill="#7C3AED" fillOpacity={0.3} />
               </RadarChart>
             </ResponsiveContainer>
           </div>

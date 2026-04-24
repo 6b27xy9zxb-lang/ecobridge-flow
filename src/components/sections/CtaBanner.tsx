@@ -17,7 +17,7 @@ export function CtaBanner() {
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.25em] text-white/70">Get started today</p>
               <h2 className="mt-3 text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.05] tracking-tight">
-                Start your green career journey today.
+                Turn data into your next move.
               </h2>
               <p className="mt-3 max-w-xl text-base text-white/80">
                 One platform, two crises, one connected solution. Free forever for individuals.

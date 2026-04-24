@@ -54,17 +54,32 @@
   --color-orange-eb: var(--orange-eb);
   --color-sage: var(--sage);
   --color-orange-glow: var(--orange-glow);
+  --color-obsidian: var(--obsidian);
+  --color-violet-eb: var(--violet);
+  --color-violet-glow: var(--violet-glow);
+  --color-mist: var(--mist);
+  --color-graphite: var(--graphite);
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* EcoBridge palette in oklch */
-  --charcoal: oklch(0.16 0 0);          /* #0D0D0D */
-  --cream: oklch(0.953 0.014 80);       /* #F5F0E8 */
-  --orange-eb: oklch(0.68 0.22 38);     /* #FF4D00 */
-  --orange-glow: oklch(0.74 0.21 45);
-  --sage: oklch(0.55 0.05 145);         /* #5C7A5C */
+  /* EcoBridge palette — Obsidian / Violet analytics rebrand
+     Legacy token names retained as aliases so existing components recolor automatically. */
+  --obsidian: oklch(0.14 0.012 280);            /* deep near-black with cool cast */
+  --obsidian-deep: oklch(0.09 0.012 280);
+  --graphite: oklch(0.28 0.012 280);
+  --mist: oklch(0.965 0.006 280);               /* soft white */
+  --violet: oklch(0.62 0.22 295);               /* primary accent #7C3AED-ish */
+  --violet-glow: oklch(0.72 0.20 300);
+  --violet-deep: oklch(0.45 0.22 290);
+
+  /* Legacy aliases — kept so existing classes (var(--charcoal), var(--orange-eb)…) restyle in place */
+  --charcoal: var(--obsidian);
+  --cream: var(--mist);
+  --orange-eb: var(--violet);
+  --orange-glow: var(--violet-glow);
+  --sage: var(--graphite);
 
   --background: var(--cream);
   --foreground: var(--charcoal);
@@ -74,35 +89,36 @@
   --popover-foreground: var(--charcoal);
   --primary: var(--orange-eb);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.92 0.01 80);
-  --secondary-foreground: var(--charcoal);
-  --muted: oklch(0.92 0.008 80);
-  --muted-foreground: oklch(0.45 0.01 80);
-  --accent: var(--sage);
+  --secondary: oklch(0.93 0.005 280);
+  --secondary-foreground: var(--obsidian);
+  --muted: oklch(0.93 0.005 280);
+  --muted-foreground: oklch(0.45 0.01 280);
+  --accent: var(--violet);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.01 80);
-  --input: oklch(0.88 0.01 80);
-  --ring: var(--orange-eb);
-  --chart-1: var(--orange-eb);
-  --chart-2: var(--sage);
-  --chart-3: oklch(0.45 0.18 30);
-  --chart-4: oklch(0.7 0.15 75);
-  --chart-5: oklch(0.4 0.05 145);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: var(--charcoal);
-  --sidebar-primary: var(--orange-eb);
+  --border: oklch(0.9 0.006 280);
+  --input: oklch(0.9 0.006 280);
+  --ring: var(--violet);
+  --chart-1: var(--violet);
+  --chart-2: var(--violet-glow);
+  --chart-3: oklch(0.55 0.18 270);
+  --chart-4: oklch(0.7 0.14 220);
+  --chart-5: var(--graphite);
+  --sidebar: oklch(0.984 0.003 280);
+  --sidebar-foreground: var(--obsidian);
+  --sidebar-primary: var(--violet);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.96 0.01 80);
-  --sidebar-accent-foreground: var(--charcoal);
-  --sidebar-border: oklch(0.88 0.01 80);
-  --sidebar-ring: var(--orange-eb);
+  --sidebar-accent: oklch(0.96 0.005 280);
+  --sidebar-accent-foreground: var(--obsidian);
+  --sidebar-border: oklch(0.9 0.005 280);
+  --sidebar-ring: var(--violet);
 
-  --gradient-orange: linear-gradient(135deg, oklch(0.68 0.22 38), oklch(0.74 0.21 50));
-  --gradient-dark: linear-gradient(180deg, oklch(0.16 0 0), oklch(0.10 0 0));
-  --shadow-elegant: 0 30px 80px -30px color-mix(in oklab, var(--orange-eb) 35%, transparent);
-  --shadow-glass: 0 10px 40px -10px oklch(0 0 0 / 0.4);
+  --gradient-orange: linear-gradient(135deg, var(--violet), var(--violet-glow));
+  --gradient-violet: linear-gradient(135deg, var(--violet-deep), var(--violet-glow));
+  --gradient-dark: linear-gradient(180deg, var(--obsidian), var(--obsidian-deep));
+  --shadow-elegant: 0 30px 80px -30px color-mix(in oklab, var(--violet) 45%, transparent);
+  --shadow-glass: 0 10px 40px -10px oklch(0 0 0 / 0.5);
 }
 
 .dark {

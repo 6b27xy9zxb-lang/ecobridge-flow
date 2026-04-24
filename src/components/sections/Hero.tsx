@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const HEADLINE = ["The", "green", "transition", "is", "breaking", "two", "systems", "at", "once."];
+const HEADLINE = ["The", "intelligence", "layer", "for", "the", "green", "transition."];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,7 +19,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--charcoal)]/40 via-[var(--charcoal)]/60 to-[var(--charcoal)]" />
         <div className="absolute inset-0 grid-bg opacity-40" />
         {/* radial glow */}
-        <div className="absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,77,0,0.18)_0%,transparent_60%)]" />
+        <div className="absolute left-1/2 top-1/2 h-[60vmax] w-[60vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.22)_0%,transparent_60%)]" />
       </motion.div>
 
       <div className="mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pt-28 pb-24 md:px-8">
@@ -33,7 +33,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--orange-eb)] opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--orange-eb)]" />
           </span>
-          EDGEIQ Hackathon 2026 · Live demo
+          EDGEIQ Hackathon 2026 · Live analytics demo
         </motion.div>
 
         <h1 className="mt-8 max-w-[18ch] text-balance text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
@@ -56,7 +56,7 @@ export function Hero() {
           transition={{ delay: 1.4, duration: 0.8 }}
           className="mt-6 text-[clamp(1.6rem,3.5vw,2.6rem)] font-light tracking-tight text-white/90"
         >
-          EcoBridge fixes <span className="text-[var(--orange-eb)] italic">both.</span>
+          One platform. <span className="text-[var(--violet-glow)] italic">Measured.</span>
         </motion.p>
 
         <motion.p
@@ -65,8 +65,8 @@ export function Hero() {
           transition={{ delay: 1.7, duration: 1 }}
           className="mt-6 max-w-xl text-sm leading-relaxed text-white/55 md:text-base"
         >
-          One platform. Two crises. One connected solution. ScopeMap measures. CareerShift retrains.
-          The Connector Layer matches them — automatically.
+          A unified analytics platform that maps Scope 3 emissions, models workforce capability,
+          and routes the two together — in real time. Built for operations, strategy, and ESG teams.
         </motion.p>
 
         <motion.div
@@ -76,11 +76,11 @@ export function Hero() {
           className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
           <a href="#demo" className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-6 py-3.5 text-sm font-medium text-white shadow-[0_20px_50px_-15px_var(--orange-eb)] transition-all hover:scale-[1.02]">
-            Map Your Emissions
+            Launch the platform
             <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
           </a>
-          <a href="#demo" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10">
-            Find Green Careers
+          <a href="#platform" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-medium text-white backdrop-blur transition-all hover:bg-white/10">
+            See the architecture
           </a>
         </motion.div>
       </div>

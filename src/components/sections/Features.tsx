@@ -21,7 +21,7 @@ export function Features() {
               Features
             </div>
             <h2 className="max-w-2xl text-balance text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.05] tracking-tight">
-              Everything you need to <span className="italic text-[var(--orange-eb)]">go green — smarter.</span>
+              Everything you need to <span className="italic text-[var(--orange-eb)]">operate the transition — smarter.</span>
             </h2>
           </div>
         </div>
