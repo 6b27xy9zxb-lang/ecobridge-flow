@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell, LineChart, Line, CartesianGrid } from "recharts";
 import { Upload, FileText, Send, Sparkles, AlertTriangle, TrendingUp, Paperclip, X } from "lucide-react";
-import { DEFAULT_GEMINI_KEY } from "@/lib/site";
+import { callAi } from "@/utils/ai.functions";
 
 type Tab = "analyze" | "workspace" | "talent" | "chat";
 
