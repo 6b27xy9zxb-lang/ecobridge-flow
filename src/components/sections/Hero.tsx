@@ -65,8 +65,8 @@ export function Hero() {
           transition={{ delay: 1.7, duration: 1 }}
           className="mt-6 max-w-xl text-sm leading-relaxed text-white/55 md:text-base"
         >
-          One platform. Two crises. One connected solution. ScopeMap measures. CareerShift retrains.
-          The Connector Layer matches them — automatically.
+          A unified analytics platform that maps Scope 3 emissions, models workforce capability,
+          and routes the two together — in real time. Built for operations, strategy, and ESG teams.
         </motion.p>
 
         <motion.div
