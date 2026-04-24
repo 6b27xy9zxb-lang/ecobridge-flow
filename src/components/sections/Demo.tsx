@@ -891,7 +891,6 @@ Location preference: ${location}
 Suggest 6 ranked LinkedIn-style candidates.`;
 
       const text = await callGemini({
-        apiKey,
         system,
         contents: [{ role: "user", parts: [{ text: userMsg }] }],
         json: true,
