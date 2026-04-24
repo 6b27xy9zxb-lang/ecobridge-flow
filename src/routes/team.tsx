@@ -7,10 +7,10 @@ import teamHero from "@/assets/team-hero.jpg";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team & Vision — EcoBridge" },
-      { name: "description", content: "Meet Team Mindmesh — the builders behind EcoBridge, the operating system for the green transition." },
-      { property: "og:title", content: "Team & Vision — EcoBridge" },
-      { property: "og:description", content: "One connected platform where every emissions reduction creates a career pathway." },
+      { title: "Team & Vision — Northbeam" },
+      { name: "description", content: "Meet Team Mindmesh — the builders behind Northbeam, the intelligence layer for modern operations." },
+      { property: "og:title", content: "Team & Vision — Northbeam" },
+      { property: "og:description", content: "One workbench where every report turns into a shippable decision." },
       { property: "og:image", content: teamHero },
     ],
   }),
@@ -18,10 +18,10 @@ export const Route = createFileRoute("/team")({
 });
 
 const MEMBERS = [
-  { initials: "P", name: "Piyush S Meharwade", role: "Product · Architecture", fact: "Once shipped a hackathon win at 4 AM on filter coffee." },
-  { initials: "H", name: "Himanshu Pal", role: "AI · Backend", fact: "Believes every problem is a graph problem in disguise." },
+  { initials: "P", name: "Piyush S Meharwade", role: "Product · Architecture", fact: "Believes the right diagram replaces ten meetings." },
+  { initials: "H", name: "Himanshu Pal", role: "AI · Backend", fact: "Treats every problem as a graph problem in disguise." },
   { initials: "M", name: "Mahi Talwani", role: "Design · Frontend", fact: "Pixel-perfect, but only after the third espresso." },
-  { initials: "N", name: "Nandini Singh", role: "Research · Climate", fact: "Reads CSRD whitepapers for fun. Yes, really." },
+  { initials: "N", name: "Nandini Singh", role: "Research · Operations", fact: "Has read more ops post-mortems than anyone should." },
 ];
 
 function TeamPage() {
@@ -30,11 +30,11 @@ function TeamPage() {
       <Nav />
 
       {/* Vision hero */}
-      <section className="relative isolate overflow-hidden bg-[var(--orange-eb)] pt-32 pb-24 text-white md:min-h-[90svh] md:flex md:items-center md:pt-40">
-        <img src={teamHero} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-25 mix-blend-overlay" loading="lazy" width={1920} height={1080} />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--orange-eb)]/0 via-transparent to-[var(--orange-eb)]/40" />
+      <section className="relative isolate overflow-hidden bg-[var(--charcoal)] pt-32 pb-24 text-white md:min-h-[90svh] md:flex md:items-center md:pt-40">
+        <img src={teamHero} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-40" loading="lazy" width={1920} height={1080} />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--charcoal)]/30 via-[var(--charcoal)]/60 to-[var(--charcoal)]" />
         <div className="mx-auto max-w-7xl px-6 md:px-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="text-xs font-medium uppercase tracking-[0.3em] text-white/80">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="text-xs font-medium uppercase tracking-[0.3em] text-[var(--orange-eb)]">
             Our Vision
           </motion.div>
           <motion.h1
@@ -43,7 +43,7 @@ function TeamPage() {
             transition={{ duration: 0.9, delay: 0.15 }}
             className="mt-6 max-w-[20ch] text-balance text-[clamp(2.6rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.03em]"
           >
-            EcoBridge is the operating system for the green transition.
+            Northbeam is the intelligence layer for modern operations.
           </motion.h1>
         </div>
       </section>
@@ -52,7 +52,7 @@ function TeamPage() {
       <section className="bg-[var(--cream)] py-28 md:py-40">
         <div className="mx-auto max-w-3xl px-6 text-center md:px-8">
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-balance text-[clamp(1.4rem,3vw,2.4rem)] font-light leading-snug tracking-tight text-[var(--charcoal)]">
-            We believe the green economy doesn't need two separate revolutions — one for business compliance, one for worker survival. It needs <span className="font-medium italic text-[var(--orange-eb)]">one connected platform</span> where every emissions reduction creates a career pathway.
+            Operators don't lack data — they lack the time to act on it. We're building the workbench that closes the gap between <span className="font-medium italic text-[var(--orange-eb)]">a report on your desk</span> and a decision in production.
           </motion.p>
         </div>
       </section>
@@ -79,7 +79,7 @@ function TeamPage() {
                 className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 transition-all hover:border-[var(--orange-eb)]/40 hover:bg-white/[0.07]"
               >
                 <div className="flex items-start gap-5">
-                  <div className="grid h-20 w-20 place-items-center rounded-full text-3xl font-semibold" style={{ background: `linear-gradient(135deg, var(--orange-eb), var(--sage))` }}>
+                  <div className="grid h-20 w-20 place-items-center rounded-full text-3xl font-semibold text-white" style={{ background: `linear-gradient(135deg, var(--violet), var(--orange-eb))` }}>
                     {m.initials}
                   </div>
                   <div className="flex-1">
