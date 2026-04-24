@@ -236,7 +236,6 @@ Be specific. Reference actual numbers from the report. Avoid fluff. Avoid sustai
       if (parts.length === 0) parts.push({ text: sourceText });
 
       const raw = await callGemini({
-        apiKey,
         system,
         contents: [{ role: "user", parts }],
         json: true,
