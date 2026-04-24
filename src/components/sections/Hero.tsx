@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const HEADLINE = ["The", "green", "transition", "is", "breaking", "two", "systems", "at", "once."];
+const HEADLINE = ["The", "intelligence", "layer", "for", "the", "green", "transition."];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
