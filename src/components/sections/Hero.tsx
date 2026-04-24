@@ -56,7 +56,7 @@ export function Hero() {
           transition={{ delay: 1.4, duration: 0.8 }}
           className="mt-6 text-[clamp(1.6rem,3.5vw,2.6rem)] font-light tracking-tight text-white/90"
         >
-          EcoBridge fixes <span className="text-[var(--orange-eb)] italic">both.</span>
+          One platform. <span className="text-[var(--violet-glow)] italic">Measured.</span>
         </motion.p>
 
         <motion.p
