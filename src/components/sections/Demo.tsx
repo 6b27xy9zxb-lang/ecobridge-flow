@@ -74,31 +74,52 @@ export function Demo() {
 }
 
 /* ============================================================
-   GEMINI HELPER
+   AI HELPER — routes through Lovable AI Gateway via server fn
    ============================================================ */
 
+type GeminiPart = { text?: string; inline_data?: { mime_type: string; data: string } };
+type GeminiContent = { role: "user" | "model"; parts: GeminiPart[] };
+
 async function callGemini(opts: {
-  apiKey: string;
+  apiKey?: string; // ignored — kept for backwards compatibility
   system: string;
-  contents: { role: "user" | "model"; parts: { text?: string; inline_data?: { mime_type: string; data: string } }[] }[];
+  contents: GeminiContent[];
   json?: boolean;
 }) {
-  const { apiKey, system, contents, json } = opts;
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents,
-        systemInstruction: { parts: [{ text: system }] },
-        generationConfig: json ? { responseMimeType: "application/json" } : undefined,
-      }),
+  const { system, contents, json } = opts;
+
+  // Convert Gemini-style contents → OpenAI-style messages for Lovable AI
+  const messages = contents.map((c) => {
+    const role = c.role === "model" ? "assistant" : "user";
+    const textParts = c.parts.filter((p) => p.text).map((p) => p.text as string);
+    const mediaParts = c.parts.filter((p) => p.inline_data);
+
+    if (mediaParts.length === 0) {
+      return { role, content: textParts.join("\n\n") } as const;
     }
-  );
-  const data = await res.json();
-  if (!res.ok) throw new Error(data?.error?.message || "Gemini request failed");
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+    const content: Array<
+      | { type: "text"; text: string }
+      | { type: "image_url"; image_url: { url: string } }
+    > = [];
+    if (textParts.length) content.push({ type: "text", text: textParts.join("\n\n") });
+    for (const m of mediaParts) {
+      const d = m.inline_data!;
+      content.push({
+        type: "image_url",
+        image_url: { url: `data:${d.mime_type};base64,${d.data}` },
+      });
+    }
+    return { role, content } as const;
+  });
+
+  const result = await callAi({ data: { system, messages: messages as any, json } });
+  if (!result.ok) throw new Error(result.error);
+  let text = result.text || "";
+  if (json) {
+    // Strip ``` fences if model adds them despite response_format
+    text = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "");
+  }
+  return text;
 }
 
 function fileToBase64(file: File): Promise<string> {
