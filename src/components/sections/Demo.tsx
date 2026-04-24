@@ -552,7 +552,7 @@ function WorkerResults({ onReset }: { onReset: () => void }) {
                 <PolarGrid stroke="rgba(255,255,255,0.1)" />
                 <PolarAngleAxis dataKey="skill" stroke="rgba(255,255,255,0.5)" fontSize={10} />
                 <PolarRadiusAxis stroke="rgba(255,255,255,0.1)" tick={false} axisLine={false} />
-                <Radar dataKey="v" stroke="#FF4D00" fill="#FF4D00" fillOpacity={0.3} />
+                <Radar dataKey="v" stroke="#7C3AED" fill="#7C3AED" fillOpacity={0.3} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
