@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const ITEMS = [
   {
     initials: "DR",
-    quote: "We replaced a 4-hour weekly ops review with a 12-minute Northbeam session. Same decisions, sharper insight, half the room.",
+    quote: "We replaced a 4-hour weekly ops review with a 12-minute EcoBridge session. Same decisions, sharper insight, half the room.",
     name: "Daniel Reyes",
     role: "COO, Nordcrest Logistics",
   },

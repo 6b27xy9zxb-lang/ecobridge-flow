@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const PHASES = [
   { tag: "Phase 01", title: "Operations & Strategy teams", body: "Mid-market COOs, Heads of Strategy, Ops leads — the people drowning in reports today." },
   { tag: "Phase 02", title: "Cross-functional rollouts", body: "Sales, CS, Product, Finance — one workbench, one reasoning layer across the company." },
-  { tag: "Phase 03", title: "Embedded analyst API", body: "Northbeam reasoning available inside Notion, Linear, Slack and your own products." },
+  { tag: "Phase 03", title: "Embedded analyst API", body: "EcoBridge reasoning available inside Notion, Linear, Slack and your own products." },
   { tag: "Ecosystem", title: "Open analyst platform", body: "BI vendors, consultancies and PE firms plug their data and playbooks directly in." },
 ];
 

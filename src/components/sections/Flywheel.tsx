@@ -10,7 +10,7 @@ const NODES = [
 
 const STATS = [
   { k: "Compounding context", v: "Every report you ingest sharpens the next diagnosis. Models learn your operation, not the average one." },
-  { k: "Closed-loop feedback", v: "Mark a recommendation as shipped. Northbeam tracks the metric and updates the playbook automatically." },
+  { k: "Closed-loop feedback", v: "Mark a recommendation as shipped. EcoBridge tracks the metric and updates the playbook automatically." },
   { k: "From signal to ticket", v: "Recommendations come pre-scoped: owner, expected impact, and the KPI to watch — straight into your tracker." },
 ];
 
@@ -106,7 +106,7 @@ export function Flywheel() {
           transition={{ duration: 0.8 }}
           className="mx-auto mt-24 max-w-3xl text-balance text-center text-[clamp(1.6rem,3.5vw,2.6rem)] font-light leading-snug tracking-tight text-white/90 md:mt-32"
         >
-          “A dashboard tells you what happened. <span className="italic text-[var(--orange-eb)]">Northbeam tells you what to do next.</span>”
+          “A dashboard tells you what happened. <span className="italic text-[var(--orange-eb)]">EcoBridge tells you what to do next.</span>”
         </motion.blockquote>
       </div>
     </section>

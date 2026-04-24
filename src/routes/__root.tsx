@@ -26,8 +26,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Northbeam — Turn every report into a decision." },
-      { name: "description", content: "Northbeam is the intelligence layer for modern operations. Upload a report, surface the bottleneck, ship the next move — on one connected workbench." },
+      { title: "EcoBridge — Turn every report into a decision." },
+      { name: "description", content: "EcoBridge is the intelligence layer for modern operations. Upload a report, surface the bottleneck, ship the next move — on one connected workbench." },
       { name: "author", content: "Team Mindmesh" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -4,7 +4,7 @@ import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis, Tooltip, Cell, LineCh
 import { Upload, FileText, Send, Sparkles, AlertTriangle, TrendingUp, Paperclip, X } from "lucide-react";
 import { DEFAULT_GEMINI_KEY } from "@/lib/site";
 
-type Tab = "analyze" | "workspace" | "chat";
+type Tab = "analyze" | "workspace" | "talent" | "chat";
 
 export function Demo() {
   const [tab, setTab] = useState<Tab>("analyze");
@@ -18,12 +18,13 @@ export function Demo() {
         </div>
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <h2 className="max-w-2xl text-balance text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[1.02] tracking-tight">
-            Try Northbeam. <span className="text-[var(--charcoal)]/50">No signup.</span>
+            Try EcoBridge. <span className="text-[var(--charcoal)]/50">No signup.</span>
           </h2>
           <div className="inline-flex rounded-full border border-[var(--charcoal)]/10 bg-white p-1 shadow-sm">
             {([
               { id: "analyze", label: "Analyze a report" },
               { id: "workspace", label: "Live workspace" },
+              { id: "talent", label: "Talent match" },
               { id: "chat", label: "AI Analyst" },
             ] as { id: Tab; label: string }[]).map((t) => (
               <button
@@ -47,7 +48,7 @@ export function Demo() {
             <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
             <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
             <div className="mx-auto rounded-md bg-white/5 px-3 py-1 text-[11px] text-white/50">
-              app.northbeam.io / {tab}
+              app.ecobridge.io / {tab}
             </div>
           </div>
 
@@ -62,6 +63,7 @@ export function Demo() {
             >
               {tab === "analyze" && <AnalyzeFlow />}
               {tab === "workspace" && <WorkspaceFlow />}
+              {tab === "talent" && <TalentFlow />}
               {tab === "chat" && <ChatFlow />}
             </motion.div>
           </AnimatePresence>
@@ -181,7 +183,7 @@ function AnalyzeFlow() {
     setResult(null);
 
     try {
-      const system = `You are Northbeam, a senior business operations analyst. Read the report and return STRICT JSON matching this schema (no prose, no markdown):
+      const system = `You are EcoBridge, a senior business operations analyst. Read the report and return STRICT JSON matching this schema (no prose, no markdown):
 
 {
   "summary": "2-sentence executive summary of what's happening operationally",
@@ -303,7 +305,7 @@ Be specific. Reference actual numbers from the report. Avoid fluff. Avoid sustai
 
         {/* Side panel — what we look for */}
         <aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-          <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">What Northbeam looks for</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-[var(--orange-eb)]">What EcoBridge looks for</p>
           <ul className="mt-5 space-y-4 text-sm text-white/75">
             {[
               { t: "Bottlenecks", d: "Stages where throughput collapses." },
@@ -542,7 +544,7 @@ function WorkspaceFlow() {
 
 type Msg = { role: "user" | "model"; text: string; attachment?: string };
 
-const SYSTEM_PROMPT = `You are Northbeam, a senior business operations analyst.
+const SYSTEM_PROMPT = `You are EcoBridge, a senior business operations analyst.
 
 Your job is to help operators read their data and decide what to do next. You analyze reports, dashboards, exports and pasted notes, and produce sharp, actionable insights.
 
@@ -633,7 +635,7 @@ function ChatFlow() {
         <div className="flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--orange-eb)] text-white"><Sparkles className="h-4 w-4" /></span>
           <div>
-            <p className="text-sm font-semibold">Northbeam · AI Analyst</p>
+            <p className="text-sm font-semibold">EcoBridge · AI Analyst</p>
             <p className="text-[11px] text-white/50">Operations · workflows · recommendations</p>
           </div>
         </div>
@@ -666,7 +668,7 @@ function ChatFlow() {
           <div className="grid h-full place-items-center text-center">
             <div className="max-w-md">
               <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-[var(--orange-eb)] text-white"><Sparkles className="h-5 w-5" /></div>
-              <p className="mt-4 text-lg font-medium">Ask Northbeam about your operations.</p>
+              <p className="mt-4 text-lg font-medium">Ask EcoBridge about your operations.</p>
               <p className="mt-1 text-sm text-white/50">Drop a report or paste data, then ask what to do about it.</p>
               <div className="mt-6 flex flex-wrap justify-center gap-2">
                 {PROMPT_CHIPS.map((p) => (
@@ -721,7 +723,7 @@ function ChatFlow() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask Northbeam to analyze something…"
+            placeholder="Ask EcoBridge to analyze something…"
             className="flex-1 bg-transparent text-sm placeholder:text-white/30 focus:outline-none"
           />
           <button type="submit" disabled={loading || (!input.trim() && !pendingFile)} className="grid h-9 w-9 place-items-center rounded-xl bg-[var(--orange-eb)] text-white disabled:opacity-40">
@@ -803,6 +805,315 @@ function LoadingOverlay({ messages }: { messages: string[] }) {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   TALENT MATCH FLOW — AI-suggested LinkedIn candidates for a role
+   ============================================================ */
+
+type Candidate = {
+  name: string;
+  headline: string;
+  location: string;
+  experience_years: number;
+  current_company: string;
+  fit_score: number; // 0–100
+  match_reason: string;
+  skills: string[];
+  availability: "Open to work" | "Passive" | "Actively interviewing";
+  avatar_initials: string;
+  avatar_hue: number;
+};
+
+const TALENT_PRESETS = [
+  {
+    role: "Senior Sustainability Data Analyst",
+    team: "ESG / Reporting",
+    headcount: 1,
+    skills: "Scope 1-3 emissions, CSRD, SQL, Python, Power BI",
+    location: "Remote · EU",
+  },
+  {
+    role: "Operations Engineer (Process Optimization)",
+    team: "Industrial Ops",
+    headcount: 2,
+    skills: "Lean, Six Sigma, throughput modeling, SCADA, Python",
+    location: "Berlin, DE",
+  },
+  {
+    role: "Renewables Project Manager",
+    team: "Clean Energy Deployment",
+    headcount: 1,
+    skills: "Solar PV, wind, PPA negotiation, stakeholder management",
+    location: "Hybrid · Madrid",
+  },
+];
+
+function TalentFlow() {
+  const [apiKey, setApiKey] = useState(DEFAULT_GEMINI_KEY);
+  const [role, setRole] = useState(TALENT_PRESETS[0].role);
+  const [team, setTeam] = useState(TALENT_PRESETS[0].team);
+  const [headcount, setHeadcount] = useState(TALENT_PRESETS[0].headcount);
+  const [skills, setSkills] = useState(TALENT_PRESETS[0].skills);
+  const [location, setLocation] = useState(TALENT_PRESETS[0].location);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [candidates, setCandidates] = useState<Candidate[] | null>(null);
+
+  function applyPreset(i: number) {
+    const p = TALENT_PRESETS[i];
+    setRole(p.role); setTeam(p.team); setHeadcount(p.headcount);
+    setSkills(p.skills); setLocation(p.location);
+    setCandidates(null); setError(null);
+  }
+
+  async function findTalent() {
+    setLoading(true); setError(null); setCandidates(null);
+    try {
+      const system = `You are EcoBridge Talent, an AI sourcing analyst that matches green-economy professionals to open roles.
+Return STRICT JSON only (no prose, no markdown fences) matching this schema:
+{
+  "candidates": [{
+    "name": string (realistic full name),
+    "headline": string (LinkedIn-style one-liner, e.g. "ESG Data Lead @ Vestas | ex-Siemens Energy"),
+    "location": string,
+    "experience_years": number,
+    "current_company": string,
+    "fit_score": number (0-100, varied — top match should be 88-97),
+    "match_reason": string (1 sentence on why they fit THIS role),
+    "skills": string[] (5-7 skills, overlap with the role's required skills),
+    "availability": "Open to work" | "Passive" | "Actively interviewing"
+  }]
+}
+Generate exactly 6 diverse, plausible candidates. Mix seniorities, locations matching the requested geography, and reasons. Sort by fit_score descending. Names must be diverse and realistic.`;
+
+      const userMsg = `Open role: ${role}
+Team: ${team}
+Headcount needed: ${headcount}
+Required skills: ${skills}
+Location preference: ${location}
+
+Suggest 6 ranked LinkedIn-style candidates.`;
+
+      const text = await callGemini({
+        apiKey,
+        system,
+        contents: [{ role: "user", parts: [{ text: userMsg }] }],
+        json: true,
+      });
+      const parsed = JSON.parse(text);
+      const list: Candidate[] = (parsed.candidates || []).map((c: Candidate, i: number) => ({
+        ...c,
+        avatar_initials: (c.name || "??").split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase(),
+        avatar_hue: (i * 53 + 200) % 360,
+      }));
+      setCandidates(list);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Failed to fetch candidates");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="grid gap-0 md:grid-cols-[360px_1fr]">
+      {/* Left: brief */}
+      <div className="border-b border-white/5 bg-[var(--charcoal)] p-6 text-white md:border-b-0 md:border-r">
+        <div className="mb-4 flex items-center gap-2 text-[10px] uppercase tracking-widest text-white/50">
+          <svg viewBox="0 0 24 24" className="h-3 w-3" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.5 18H6v-8h2.5v8zM7.2 8.9a1.45 1.45 0 1 1 0-2.9 1.45 1.45 0 0 1 0 2.9zM18 18h-2.5v-4.3c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1V18H10.2v-8h2.4v1.1c.4-.7 1.2-1.3 2.4-1.3 1.7 0 3 1.1 3 3.5V18z"/></svg>
+          Workforce brief
+        </div>
+        <p className="text-lg font-semibold leading-tight">Find the people you need.</p>
+        <p className="mt-1 text-xs text-white/55">EcoBridge scans LinkedIn-style profiles and ranks the best fit for your open role.</p>
+
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {TALENT_PRESETS.map((p, i) => (
+            <button key={p.role} onClick={() => applyPreset(i)}
+              className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-white/70 hover:bg-white/10">
+              {p.role.split(" ").slice(0, 2).join(" ")}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-5 space-y-3">
+          <Field label="Role" value={role} onChange={setRole} />
+          <Field label="Team" value={team} onChange={setTeam} />
+          <div className="grid grid-cols-2 gap-3">
+            <Field label="Headcount" value={String(headcount)} onChange={(v) => setHeadcount(Math.max(1, Number(v) || 1))} />
+            <Field label="Location" value={location} onChange={setLocation} />
+          </div>
+          <Field label="Required skills" value={skills} onChange={setSkills} multiline />
+        </div>
+
+        <details className="mt-4">
+          <summary className="cursor-pointer text-[10px] uppercase tracking-widest text-white/40">Gemini key</summary>
+          <input value={apiKey} onChange={(e) => setApiKey(e.target.value)} type="password"
+            className="mt-2 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:border-[var(--orange-eb)] focus:outline-none"
+            placeholder="AIza..." />
+        </details>
+
+        <button onClick={findTalent} disabled={loading || !apiKey}
+          className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--orange-eb)] px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_-8px_var(--orange-eb)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50">
+          {loading ? (<><span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" /> Sourcing…</>) : (<><Sparkles className="h-4 w-4" /> Find candidates</>)}
+        </button>
+        {error && <p className="mt-3 text-xs text-[var(--orange-eb)]">{error}</p>}
+      </div>
+
+      {/* Right: results */}
+      <div className="bg-[var(--cream)] p-6 md:p-8">
+        {!candidates && !loading && <TalentEmpty role={role} />}
+        {loading && <TalentLoading role={role} />}
+        {candidates && <TalentResults candidates={candidates} role={role} headcount={headcount} />}
+      </div>
+    </div>
+  );
+}
+
+function Field({ label, value, onChange, multiline }: { label: string; value: string; onChange: (v: string) => void; multiline?: boolean }) {
+  return (
+    <label className="block">
+      <span className="mb-1 block text-[10px] uppercase tracking-widest text-white/40">{label}</span>
+      {multiline ? (
+        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={2}
+          className="w-full resize-none rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:border-[var(--orange-eb)] focus:outline-none" />
+      ) : (
+        <input value={value} onChange={(e) => onChange(e.target.value)}
+          className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-xs text-white placeholder:text-white/30 focus:border-[var(--orange-eb)] focus:outline-none" />
+      )}
+    </label>
+  );
+}
+
+function TalentEmpty({ role }: { role: string }) {
+  return (
+    <div className="flex h-full min-h-[520px] flex-col items-center justify-center text-center">
+      <div className="grid h-16 w-16 place-items-center rounded-2xl bg-[var(--charcoal)]/5">
+        <svg viewBox="0 0 24 24" className="h-7 w-7 text-[var(--charcoal)]/40" fill="none" stroke="currentColor" strokeWidth="1.6">
+          <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+        </svg>
+      </div>
+      <p className="mt-4 text-lg font-semibold text-[var(--charcoal)]">Ready to source for <span className="text-[var(--orange-eb)]">{role}</span></p>
+      <p className="mt-1 max-w-sm text-sm text-[var(--charcoal)]/55">Click <b>Find candidates</b> and EcoBridge will return a ranked shortlist with fit scores, skills, and outreach reasoning.</p>
+    </div>
+  );
+}
+
+function TalentLoading({ role }: { role: string }) {
+  const stages = [`Scanning 4.2M green-economy profiles…`, `Filtering for "${role}"…`, `Scoring fit against role brief…`, `Ranking shortlist…`];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => { const t = setInterval(() => setIdx((i) => (i + 1) % stages.length), 900); return () => clearInterval(t); }, []);
+  return (
+    <div className="flex h-full min-h-[520px] flex-col items-center justify-center">
+      <div className="relative h-20 w-20">
+        <div className="absolute inset-0 animate-ping rounded-full bg-[var(--orange-eb)]/20" />
+        <div className="absolute inset-2 rounded-full bg-[var(--orange-eb)]/30" />
+        <div className="absolute inset-5 grid place-items-center rounded-full bg-[var(--orange-eb)] text-white">
+          <Sparkles className="h-5 w-5" />
+        </div>
+      </div>
+      <div className="mt-6 w-72 space-y-1.5">
+        {stages.map((s, i) => (
+          <p key={s} className="text-xs text-[var(--charcoal)]/60" style={{ opacity: i <= idx ? 1 : 0.3 }}>
+            {i <= idx ? "✓" : "○"} {s}
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TalentResults({ candidates, role, headcount }: { candidates: Candidate[]; role: string; headcount: number }) {
+  const top = candidates[0];
+  const avg = Math.round(candidates.reduce((s, c) => s + c.fit_score, 0) / Math.max(1, candidates.length));
+  return (
+    <div>
+      <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-widest text-[var(--orange-eb)]">Shortlist · {role}</p>
+          <p className="text-xl font-semibold text-[var(--charcoal)]">{candidates.length} candidates · {headcount} seat{headcount > 1 ? "s" : ""} open</p>
+        </div>
+        <div className="flex gap-2">
+          <Stat label="Top fit" value={`${top?.fit_score ?? 0}%`} />
+          <Stat label="Avg fit" value={`${avg}%`} />
+          <Stat label="Open to work" value={String(candidates.filter((c) => c.availability === "Open to work").length)} />
+        </div>
+      </div>
+
+      <div className="grid gap-3">
+        {candidates.map((c, i) => <CandidateCard key={c.name + i} c={c} rank={i + 1} />)}
+      </div>
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-[var(--charcoal)]/10 bg-white px-3 py-2">
+      <p className="text-[9px] uppercase tracking-widest text-[var(--charcoal)]/45">{label}</p>
+      <p className="text-sm font-semibold text-[var(--charcoal)]">{value}</p>
+    </div>
+  );
+}
+
+function CandidateCard({ c, rank }: { c: Candidate; rank: number }) {
+  const availColor = c.availability === "Open to work" ? "var(--orange-eb)" : c.availability === "Actively interviewing" ? "#16a34a" : "var(--charcoal)";
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: rank * 0.05 }}
+      className="group rounded-2xl border border-[var(--charcoal)]/10 bg-white p-4 shadow-sm transition hover:border-[var(--orange-eb)]/40 hover:shadow-md">
+      <div className="flex gap-4">
+        <div className="relative shrink-0">
+          <div className="grid h-14 w-14 place-items-center rounded-full text-base font-semibold text-white"
+            style={{ background: `linear-gradient(135deg, hsl(${c.avatar_hue} 70% 55%), hsl(${(c.avatar_hue + 40) % 360} 70% 45%))` }}>
+            {c.avatar_initials}
+          </div>
+          <span className="absolute -bottom-1 -right-1 grid h-6 w-6 place-items-center rounded-full bg-[var(--charcoal)] text-[10px] font-bold text-white ring-2 ring-white">{rank}</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-[var(--charcoal)]">{c.name}</p>
+              <p className="truncate text-xs text-[var(--charcoal)]/65">{c.headline}</p>
+              <p className="mt-0.5 text-[11px] text-[var(--charcoal)]/45">{c.location} · {c.experience_years} yrs · {c.current_company}</p>
+            </div>
+            <FitRing score={c.fit_score} />
+          </div>
+          <p className="mt-2 rounded-lg bg-[var(--cream)] px-3 py-2 text-[11px] leading-relaxed text-[var(--charcoal)]/75">
+            <span className="font-semibold text-[var(--orange-eb)]">Why: </span>{c.match_reason}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            {c.skills.slice(0, 6).map((s) => (
+              <span key={s} className="rounded-full bg-[var(--charcoal)]/5 px-2 py-0.5 text-[10px] text-[var(--charcoal)]/70">{s}</span>
+            ))}
+            <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-medium" style={{ color: availColor }}>
+              <span className="h-1.5 w-1.5 rounded-full" style={{ background: availColor }} />
+              {c.availability}
+            </span>
+          </div>
+          <div className="mt-3 flex gap-2">
+            <button className="rounded-full bg-[var(--charcoal)] px-3 py-1.5 text-[11px] font-medium text-white hover:brightness-110">View profile</button>
+            <button className="rounded-full border border-[var(--charcoal)]/15 px-3 py-1.5 text-[11px] font-medium text-[var(--charcoal)] hover:border-[var(--orange-eb)] hover:text-[var(--orange-eb)]">Draft outreach</button>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function FitRing({ score }: { score: number }) {
+  const r = 18, c = 2 * Math.PI * r;
+  const off = c - (Math.max(0, Math.min(100, score)) / 100) * c;
+  const color = score >= 85 ? "var(--orange-eb)" : score >= 70 ? "#f59e0b" : "var(--charcoal)";
+  return (
+    <div className="relative h-12 w-12 shrink-0">
+      <svg viewBox="0 0 44 44" className="-rotate-90">
+        <circle cx="22" cy="22" r={r} fill="none" stroke="currentColor" strokeWidth="4" className="text-[var(--charcoal)]/10" />
+        <motion.circle cx="22" cy="22" r={r} fill="none" stroke={color} strokeWidth="4" strokeLinecap="round"
+          strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: off }} transition={{ duration: 0.8, ease: "easeOut" }} />
+      </svg>
+      <div className="absolute inset-0 grid place-items-center text-[11px] font-bold text-[var(--charcoal)]">{score}</div>
     </div>
   );
 }

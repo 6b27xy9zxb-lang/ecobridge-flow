@@ -19,9 +19,9 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Northbeam — Turn every report into a decision." },
+      { title: "EcoBridge — Turn every report into a decision." },
       { name: "description", content: "Upload reports, surface bottlenecks, ship the next move. The intelligence layer for modern operations." },
-      { property: "og:title", content: "Northbeam — The intelligence layer for modern operations" },
+      { property: "og:title", content: "EcoBridge — The intelligence layer for modern operations" },
       { property: "og:description", content: "Ingest reads your data. Diagnose finds the bottleneck. Recommend ships the move — automatically." },
     ],
   }),

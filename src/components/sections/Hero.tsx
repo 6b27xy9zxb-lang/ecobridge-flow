@@ -68,7 +68,7 @@ export function Hero() {
           transition={{ delay: 1.7, duration: 1 }}
           className="mt-6 max-w-xl text-sm leading-relaxed text-white/55 md:text-base"
         >
-          Northbeam reads your operational reports, dashboards and process data,
+          EcoBridge reads your operational reports, dashboards and process data,
           then surfaces the bottlenecks, inefficiencies and resource shifts that
           actually move the number — with recommendations your team can ship this week.
         </motion.p>
